@@ -3,7 +3,7 @@ package partialord
 import (
 	"sort"
 
-	"github.com/psangwoo/parkd/osmoutils/partialord/internal/dag"
+	"github.com/psangwoo/parkd/utils/partialord/internal/dag"
 )
 
 type PartialOrdering struct {

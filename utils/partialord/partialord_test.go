@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/psangwoo/parkd/osmoutils/partialord"
+	"github.com/psangwoo/parkd/utils/partialord"
 )
 
 func TestAPI(t *testing.T) {

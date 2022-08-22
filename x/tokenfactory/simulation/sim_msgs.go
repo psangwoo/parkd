@@ -6,7 +6,7 @@ import (
 	legacysimulationtype "github.com/cosmos/cosmos-sdk/types/simulation"
 
 	"github.com/psangwoo/parkd/simulation/simtypes"
-	osmoutils "github.com/psangwoo/parkd/utils"
+	utils "github.com/psangwoo/parkd/utils"
 	"github.com/psangwoo/parkd/x/tokenfactory/keeper"
 	"github.com/psangwoo/parkd/x/tokenfactory/types"
 
@@ -116,7 +116,7 @@ func accountCreatedTokenFactoryDenom(k keeper.Keeper, ctx sdk.Context) simtypes.
 
 func getTokenFactoryDenomAndItsAdmin(k keeper.Keeper, sim *simtypes.SimCtx, ctx sdk.Context, acc legacysimulationtype.Account) (string, sdk.AccAddress, error) {
 	store := k.GetCreatorPrefixStore(ctx, acc.Address.String())
-	denoms := osmoutils.GatherAllKeysFromStore(store)
+	denoms := utils.GatherAllKeysFromStore(store)
 	denom := simtypes.RandSelect(sim, denoms...)
 
 	authData, err := k.GetAuthorityMetadata(ctx, denom)

@@ -11,7 +11,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/simulation"
 	"golang.org/x/exp/maps"
 
-	"github.com/psangwoo/parkd/osmoutils"
+	utils "github.com/psangwoo/parkd/utils"
 )
 
 // AppModuleSimulation defines the standard functions that every module should expose
@@ -128,7 +128,7 @@ func (m Manager) legacyActions(seed int64, cdc codec.JSONCodec) []ActionsWithMet
 func (m Manager) Actions(seed int64, cdc codec.JSONCodec) []ActionsWithMetadata {
 	actions := m.legacyActions(seed, cdc)
 	moduleKeys := maps.Keys(m.Modules)
-	osmoutils.SortSlice(moduleKeys)
+	utils.SortSlice(moduleKeys)
 	for _, simModuleName := range moduleKeys {
 		for _, action := range m.Modules[simModuleName].Actions() {
 			var actionWithMetaData ActionsWithMetadata

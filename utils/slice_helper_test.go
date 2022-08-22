@@ -1,11 +1,11 @@
-package osmoutils_test
+package utils_test
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/psangwoo/parkd/osmoutils"
+	utils "github.com/psangwoo/parkd/utils"
 )
 
 func TestReverseSlice(t *testing.T) {
@@ -23,7 +23,7 @@ func TestReverseSlice(t *testing.T) {
 	}
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
-			actualSolvedInput := osmoutils.ReverseSlice(tc.s)
+			actualSolvedInput := utils.ReverseSlice(tc.s)
 			require.Equal(t, tc.expectedSolvedInput, actualSolvedInput)
 		})
 	}

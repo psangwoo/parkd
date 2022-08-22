@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	ModuleDenomPrefix = "factory"
+	ModuleDenomPrefix = "q"
 	// See the TokenFactory readme for a derivation of these.
 	// TL;DR, MaxSubdenomLength + MaxHrpLength = 60 comes from SDK max denom length = 128
 	// and the structure of tokenfactory denoms.
