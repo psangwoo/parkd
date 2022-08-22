@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/CosmWasm/wasmd/x/wasm/types"
+	"github.com/psangwoo/parkd/x/wasm/types"
 
 	"github.com/stretchr/testify/assert"
 
@@ -19,8 +19,8 @@ import (
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"github.com/CosmWasm/wasmd/app"
-	"github.com/CosmWasm/wasmd/x/wasm/keeper"
+	"github.com/psangwoo/parkd/app"
+	"github.com/psangwoo/parkd/x/wasm/keeper"
 )
 
 func TestSnapshotter(t *testing.T) {

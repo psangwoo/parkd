@@ -30,7 +30,7 @@ testnet and upgrade path, and the default `wasmd` will never have a registered h
 on master. In this case, we make a `musselnet` branch off of `v0.14.0` just
 registering one handler with a given name. 
 
-Look at [PR 351](https://github.com/CosmWasm/wasmd/pull/351/files) for an example
+Look at [PR 351](https://github.com/psangwoo/parkd/pull/351/files) for an example
 of a minimal handler. We do not make any state migrations, but rather use this
 as a flag to coordinate all validators to stop the old version at one height, and
 start the specified v2 version on the next block.
@@ -41,7 +41,7 @@ Let's get the two binaries we want to test, the pre-upgrade and the post-upgrade
 binaries. In this case the pre-release is already a published to docker hub and
 can be downloaded simply via:
 
-`docker pull cosmwasm/wasmd:v0.14.0`
+`docker pull psangwoo/parkd:v0.14.0`
 
 (If this is not yet released, build it from the tip of master)
 
@@ -57,7 +57,7 @@ docker build . -t wasmd:musselnet-v2
 Verify they are both working for you locally:
 
 ```
-docker run cosmwasm/wasmd:v0.14.0 wasmd version
+docker run psangwoo/parkd:v0.14.0 wasmd version
 docker run wasmd:musselnet-v2 wasmd version
 ```
 
@@ -75,12 +75,12 @@ docker volume rm -f musselnet_client
 docker run --rm -it \
     -e PASSWORD=1234567890 \
     --mount type=volume,source=musselnet_client,target=/root \
-    cosmwasm/wasmd:v0.14.0 /opt/setup_wasmd.sh
+    psangwoo/parkd:v0.14.0 /opt/setup_wasmd.sh
 
 # enter "1234567890" when prompted
 docker run --rm -it \
     --mount type=volume,source=musselnet_client,target=/root \
-    cosmwasm/wasmd:v0.14.0 wasmd keys show -a validator
+    psangwoo/parkd:v0.14.0 wasmd keys show -a validator
 # use the address returned above here
 CLIENT=wasm1anavj4eyxkdljp27sedrdlt9dm26c8a7a8p44l
 ```
@@ -93,17 +93,17 @@ docker volume rm -f musselnet
 # add your testing address here, so you can do something with the client
 docker run --rm -it \
     --mount type=volume,source=musselnet,target=/root \
-    cosmwasm/wasmd:v0.14.0 /opt/setup_wasmd.sh $CLIENT
+    psangwoo/parkd:v0.14.0 /opt/setup_wasmd.sh $CLIENT
 
 # Update the voting times in the genesis file
 docker run --rm -it \
     --mount type=volume,source=musselnet,target=/root \
-    cosmwasm/wasmd:v0.14.0 sed -ie 's/172800s/300s/' /root/.wasmd/config/genesis.json
+    psangwoo/parkd:v0.14.0 sed -ie 's/172800s/300s/' /root/.wasmd/config/genesis.json
 
 # start up the blockchain and all embedded servers as one process
 docker run --rm -it -p 26657:26657 -p 26656:26656 -p 1317:1317 \
     --mount type=volume,source=musselnet,target=/root \
-    cosmwasm/wasmd:v0.14.0 /opt/run_wasmd.sh
+    psangwoo/parkd:v0.14.0 /opt/run_wasmd.sh
 ```
 
 ## Sanity checks
@@ -118,25 +118,25 @@ RCPT=wasm1pypadqklna33nv3gl063rd8z9q8nvauaalz820
 docker run --rm -it \
     --mount type=volume,source=musselnet_client,target=/root \
     --network=host \
-    cosmwasm/wasmd:v0.14.0 wasmd \
+    psangwoo/parkd:v0.14.0 wasmd \
     query bank balances $CLIENT
 
 docker run --rm -it \
     --mount type=volume,source=musselnet_client,target=/root \
     --network=host \
-    cosmwasm/wasmd:v0.14.0 wasmd \
+    psangwoo/parkd:v0.14.0 wasmd \
     query bank balances $RCPT
 
 docker run --rm -it \
     --mount type=volume,source=musselnet_client,target=/root \
     --network=host \
-    cosmwasm/wasmd:v0.14.0 wasmd \
+    psangwoo/parkd:v0.14.0 wasmd \
     tx send validator $RCPT 500000ucosm,600000ustake --chain-id testing
 
 docker run --rm -it \
     --mount type=volume,source=musselnet_client,target=/root \
     --network=host \
-    cosmwasm/wasmd:v0.14.0 wasmd \
+    psangwoo/parkd:v0.14.0 wasmd \
     query bank balances $RCPT
 ```
 
@@ -151,7 +151,7 @@ we have > 67% of the voting power and will pass with the validator not voting.
 docker run --rm -it \
     --mount type=volume,source=musselnet_client,target=/root \
     --network=host \
-    cosmwasm/wasmd:v0.14.0 wasmd \
+    psangwoo/parkd:v0.14.0 wasmd \
     query staking validators
 VALIDATOR=......
 
@@ -159,7 +159,7 @@ VALIDATOR=......
 docker run --rm -it \
     --mount type=volume,source=musselnet_client,target=/root \
     --network=host \
-    cosmwasm/wasmd:v0.14.0 wasmd \
+    psangwoo/parkd:v0.14.0 wasmd \
     tx staking delegate $VALIDATOR 750000000ustake \
     --from validator --chain-id testing
 ```
@@ -179,7 +179,7 @@ you put in your handler):
 docker run --rm -it \
     --mount type=volume,source=musselnet_client,target=/root \
     --network=host \
-    cosmwasm/wasmd:v0.14.0 wasmd \
+    psangwoo/parkd:v0.14.0 wasmd \
     tx gov submit-proposal software-upgrade musselnet-v2 \
     --upgrade-height=500 --deposit=10000000ustake \
     --title="Upgrade" --description="Upgrade to musselnet-v2" \
@@ -189,14 +189,14 @@ docker run --rm -it \
 docker run --rm -it \
     --mount type=volume,source=musselnet_client,target=/root \
     --network=host \
-    cosmwasm/wasmd:v0.14.0 wasmd \
+    psangwoo/parkd:v0.14.0 wasmd \
     query gov proposal 1
 
 # vote for it
 docker run --rm -it \
     --mount type=volume,source=musselnet_client,target=/root \
     --network=host \
-    cosmwasm/wasmd:v0.14.0 wasmd \
+    psangwoo/parkd:v0.14.0 wasmd \
     tx gov vote 1 yes \
     --from validator --chain-id testing
 
@@ -204,7 +204,7 @@ docker run --rm -it \
 docker run --rm -it \
     --mount type=volume,source=musselnet_client,target=/root \
     --network=host \
-    cosmwasm/wasmd:v0.14.0 wasmd \
+    psangwoo/parkd:v0.14.0 wasmd \
     query gov votes 1
 ```
 
@@ -217,7 +217,7 @@ Now, we just wait about 5 minutes for the vote to pass, and ensure it is passed:
 docker run --rm -it \
     --mount type=volume,source=musselnet_client,target=/root \
     --network=host \
-    cosmwasm/wasmd:v0.14.0 wasmd \
+    psangwoo/parkd:v0.14.0 wasmd \
     query gov proposal 1
 ```
 
@@ -234,7 +234,7 @@ immediately fail on startup, with the same error message as above.
 ```sh
 docker run --rm -it -p 26657:26657 -p 26656:26656 -p 1317:1317 \
     --mount type=volume,source=musselnet,target=/root \
-    cosmwasm/wasmd:v0.14.0 /opt/run_wasmd.sh
+    psangwoo/parkd:v0.14.0 /opt/run_wasmd.sh
 ```
 
 Then, we start with the post-upgrade version and see it properly update:

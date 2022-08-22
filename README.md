@@ -1,11 +1,11 @@
 # Wasm Zone
 
-[![CircleCI](https://circleci.com/gh/CosmWasm/wasmd/tree/master.svg?style=shield)](https://circleci.com/gh/CosmWasm/wasmd/tree/master)
-[![codecov](https://codecov.io/gh/cosmwasm/wasmd/branch/master/graph/badge.svg)](https://codecov.io/gh/cosmwasm/wasmd)
-[![Go Report Card](https://goreportcard.com/badge/github.com/CosmWasm/wasmd)](https://goreportcard.com/report/github.com/CosmWasm/wasmd)
-[![license](https://img.shields.io/github/license/CosmWasm/wasmd.svg)](https://github.com/CosmWasm/wasmd/blob/master/LICENSE)
-[![LoC](https://tokei.rs/b1/github/CosmWasm/wasmd)](https://github.com/CosmWasm/wasmd)
-<!-- [![GolangCI](https://golangci.com/badges/github.com/CosmWasm/wasmd.svg)](https://golangci.com/r/github.com/CosmWasm/wasmd) -->
+[![CircleCI](https://circleci.com/gh/psangwoo/parkd/tree/master.svg?style=shield)](https://circleci.com/gh/psangwoo/parkd/tree/master)
+[![codecov](https://codecov.io/gh/psangwoo/parkd/branch/master/graph/badge.svg)](https://codecov.io/gh/psangwoo/parkd)
+[![Go Report Card](https://goreportcard.com/badge/github.com/psangwoo/parkd)](https://goreportcard.com/report/github.com/psangwoo/parkd)
+[![license](https://img.shields.io/github/license/psangwoo/parkd.svg)](https://github.com/psangwoo/parkd/blob/master/LICENSE)
+[![LoC](https://tokei.rs/b1/github/psangwoo/parkd)](https://github.com/psangwoo/parkd)
+<!-- [![GolangCI](https://golangci.com/badges/github.com/psangwoo/parkd.svg)](https://golangci.com/r/github.com/psangwoo/parkd) -->
 
 This repository hosts `Wasmd`, the first implementation of a cosmos zone with wasm smart contracts enabled.
 
@@ -106,7 +106,7 @@ your use case.
 make install
 make test
 ```
-if you are using a linux without X or headless linux, look at [this article](https://ahelpme.com/linux/dbusexception-could-not-get-owner-of-name-org-freedesktop-secrets-no-such-name) or [#31](https://github.com/CosmWasm/wasmd/issues/31#issuecomment-577058321).
+if you are using a linux without X or headless linux, look at [this article](https://ahelpme.com/linux/dbusexception-could-not-get-owner-of-name-org-freedesktop-secrets-no-such-name) or [#31](https://github.com/psangwoo/parkd/issues/31#issuecomment-577058321).
 
 ## Protobuf
 Generate protobuf
@@ -119,7 +119,7 @@ The generators are executed within a Docker [container](./contrib/prototools-doc
 
 We provide a docker image to help with test setups. There are two modes to use it
 
-Build: `docker build -t cosmwasm/wasmd:latest .`  or pull from dockerhub
+Build: `docker build -t psangwoo/parkd:latest .`  or pull from dockerhub
 
 ### Dev server
 
@@ -136,12 +136,12 @@ docker volume rm -f wasmd_data
 docker run --rm -it \
     -e PASSWORD=xxxxxxxxx \
     --mount type=volume,source=wasmd_data,target=/root \
-    cosmwasm/wasmd:latest /opt/setup_wasmd.sh cosmos1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6
+    psangwoo/parkd:latest /opt/setup_wasmd.sh cosmos1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6
 
 # This will start both wasmd and rest-server, both are logged
 docker run --rm -it -p 26657:26657 -p 26656:26656 -p 1317:1317 \
     --mount type=volume,source=wasmd_data,target=/root \
-    cosmwasm/wasmd:latest /opt/run_wasmd.sh
+    psangwoo/parkd:latest /opt/run_wasmd.sh
 ```
 
 ### CI
@@ -154,7 +154,7 @@ rm -rf ./template && mkdir ./template
 docker run --rm -it \
     -e PASSWORD=xxxxxxxxx \
     --mount type=bind,source=$(pwd)/template,target=/root \
-    cosmwasm/wasmd:latest /opt/setup_wasmd.sh cosmos1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6
+    psangwoo/parkd:latest /opt/setup_wasmd.sh cosmos1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6
 
 sudo chown -R $(id -u):$(id -g) ./template
 
@@ -165,12 +165,12 @@ docker volume rm -f wasmd_data
 docker run --rm -it -p 26657:26657 -p 26656:26656 -p 9090:9090 \
     --mount type=bind,source=$(pwd)/template,target=/template \
     --mount type=volume,source=wasmd_data,target=/root \
-    cosmwasm/wasmd:latest /opt/run_wasmd.sh /template
+    psangwoo/parkd:latest /opt/run_wasmd.sh /template
 
 # RESTART CHAIN with existing state
 docker run --rm -it -p 26657:26657 -p 26656:26656 -p 1317:1317 \
     --mount type=volume,source=wasmd_data,target=/root \
-    cosmwasm/wasmd:latest /opt/run_wasmd.sh
+    psangwoo/parkd:latest /opt/run_wasmd.sh
 ```
 
 ## Runtime flags
@@ -181,10 +181,10 @@ to the configuration.
 
 Available flags:
  
-* `-X github.com/CosmWasm/wasmd/app.NodeDir=.corald` - set the config/data directory for the node (default `~/.wasmd`)
-* `-X github.com/CosmWasm/wasmd/app.Bech32Prefix=coral` - set the bech32 prefix for all accounts (default `wasm`)
-* `-X github.com/CosmWasm/wasmd/app.ProposalsEnabled=true` - enable all x/wasm governance proposals (default `false`)
-* `-X github.com/CosmWasm/wasmd/app.EnableSpecificProposals=MigrateContract,UpdateAdmin,ClearAdmin` - 
+* `-X github.com/psangwoo/parkd/app.NodeDir=.corald` - set the config/data directory for the node (default `~/.wasmd`)
+* `-X github.com/psangwoo/parkd/app.Bech32Prefix=coral` - set the bech32 prefix for all accounts (default `wasm`)
+* `-X github.com/psangwoo/parkd/app.ProposalsEnabled=true` - enable all x/wasm governance proposals (default `false`)
+* `-X github.com/psangwoo/parkd/app.EnableSpecificProposals=MigrateContract,UpdateAdmin,ClearAdmin` - 
     enable a subset of the x/wasm governance proposal types (overrides `ProposalsEnabled`)
 
 Examples:

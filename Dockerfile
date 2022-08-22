@@ -1,5 +1,5 @@
-# docker build . -t cosmwasm/wasmd:latest
-# docker run --rm -it cosmwasm/wasmd:latest /bin/sh
+# docker build . -t psangwoo/parkd:latest
+# docker run --rm -it psangwoo/parkd:latest /bin/sh
 FROM golang:1.17-alpine3.15 AS go-builder
 ARG arch=x86_64
 

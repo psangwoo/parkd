@@ -8,7 +8,7 @@ import (
 	"io/ioutil"
 	"strings"
 
-	wasmd "github.com/CosmWasm/wasmd/app"
+	wasmd "github.com/psangwoo/parkd/app"
 
 	ibctesting "github.com/cosmos/ibc-go/v3/testing"
 
@@ -18,7 +18,7 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	"github.com/tendermint/tendermint/libs/rand"
 
-	"github.com/CosmWasm/wasmd/x/wasm/types"
+	"github.com/psangwoo/parkd/x/wasm/types"
 )
 
 var wasmIdent = []byte("\x00\x61\x73\x6D")
