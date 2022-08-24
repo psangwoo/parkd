@@ -1,391 +1,488 @@
+<!--
+Guiding Principles:
+
+Changelogs are for humans, not machines.
+There should be an entry for every single version.
+The same types of changes should be grouped.
+Versions and sections should be linkable.
+The latest version comes first.
+The release date of each version is displayed.
+Mention whether you follow Semantic Versioning.
+
+Usage:
+
+Change log entries are to be added to the Unreleased section under the
+appropriate stanza (see below). Each entry should ideally include a tag and
+the Github issue reference in the following format:
+
+* (<tag>) \#<issue-number> message
+
+The issue numbers will later be link-ified during the release process so you do
+not have to worry about including a link manually, but you can if you wish.
+
+Types of changes (Stanzas):
+
+"Features" for new features.
+"Improvements" for changes in existing functionality.
+"Deprecated" for soon-to-be removed features.
+"Bug Fixes" for any bug fixes.
+"Client Breaking" for breaking CLI commands and REST routes.
+"State Machine Breaking" for breaking the AppState
+
+Ref: https://keepachangelog.com/en/1.0.0/
+-->
+
 # Changelog
 
-## [Unreleased](https://github.com/psangwoo/parkd/tree/HEAD)
+## [Unreleased]
+* (gaia-rho) [#1573](https://github.com/cosmos/gaia/issues/1573), [#1576](https://github.com/cosmos/gaia/issues/1576) Update cosmos ledger version to [v.0.9.3](https://github.com/cosmos/ledger-go/releases/tag/v0.9.3)
+* (gaia-rho) Update go to 1.18
+* (gaia-rho) Update Liquidity module to v2.0.0-beta1 to work with Cosmos-SDK v0.46.0-beta2
+* (gaia-rho) Update [cosmos-sdk](https://github.com/cosmos/cosmos-sdk) to [v0.46.0-beta2](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.46.0-beta2). See [CHANGELOG.md](https://github.com/cosmos/cosmos-sdk/blob/v0.46.0-beta2/CHANGELOG.md) for details.
+* (gaia-rho) Add [Groups Module](https://docs.cosmos.network/main/modules/group/#group-module).
+* (tests) Add E2E test for Bank Send.
+* (tests) Update liveness tests to use Ignite v0.21.1.
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.28.0...HEAD)
+## [v7.0.2] -2022-05-09
 
-## [v0.28.0](https://github.com/psangwoo/parkd/tree/v0.28.0) (2022-07-29)
+* (gaia) bump [cosmos-sdk](https://github.com/cosmos/cosmos-sdk) to [v0.45.4](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.45.4). See [CHANGELOG.md](https://github.com/cosmos/cosmos-sdk/blob/v0.45.4/CHANGELOG.md#v0454---2022-04-25) for details.
+* (gaia) [#1447](https://github.com/cosmos/gaia/pull/1447) Support custom message types to bypass minimum fee checks for.
+  If a transaction contains only bypassed message types, the transaction will not have minimum fee
+  checks performed during `CheckTx`. Operators can supply these message types via the `bypass-min-fee-msg-types`
+  configuration in `app.toml`. Note, by default they include various IBC message types.
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.27.0...v0.28.0)
+## [v7.0.1] -2022-04-13
 
-**API Breaking**
+* (gaia) bump [cosmos-sdk](https://github.com/cosmos/cosmos-sdk) to [v0.45.3](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.45.3). See [CHANGELOG.md](https://github.com/cosmos/cosmos-sdk/blob/v0.45.3/CHANGELOG.md#v0453---2022-04-12) for details.
+* (gaia) bump [tendermint](https://github.com/tendermint/tendermint) to [0.34.19](https://github.com/tendermint/tendermint/tree/v0.34.19). See [CHANGELOG.md](https://github.com/tendermint/tendermint/blob/v0.34.19/CHANGELOG.md#v03419) for details.
+* (gaia) bump [tm-db](https://github.com/tendermint/tm-db) to [v0.6.7](https://github.com/tendermint/tm-db/tree/v0.6.7). See [CHANGELOG.md](https://github.com/tendermint/tm-db/blob/v0.6.7/CHANGELOG.md#067) for details.
 
-No
+## [v7.0.0] - 2022-03-24
 
-**Fixed Bugs**
+- (gaia) bump [cosmos-sdk](https://github.com/cosmos/cosmos-sdk) to [v0.45.1](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.45.1). See [CHANGELOG.md](https://github.com/cosmos/cosmos-sdk/blob/v0.45.1/CHANGELOG.md#v0451---2022-02-03) for details.
+- (gaia) bump [ibc-go](https://github.com/cosmos/ibc-go) module to [v3.0.0](https://github.com/cosmos/ibc-go/releases/tag/v3.0.0). See [CHANGELOG.md](https://github.com/cosmos/ibc-go/blob/v3.0.0/CHANGELOG.md#v300---2022-03-15) for details.
+- (gaia) add [interchain account](https://github.com/cosmos/ibc-go/tree/main/modules/apps/27-interchain-accounts) module (interhchain-account module is part of ibc-go module).
+- (gaia) bump [liquidity](https://github.com/gravity-devs/liquidity) module to [v1.5.0](https://github.com/Gravity-Devs/liquidity/releases/tag/v1.5.0). See [CHANGELOG.md](https://github.com/Gravity-Devs/liquidity/blob/v1.5.0/CHANGELOG.md#v150---20220223) for details.
+- (gaia) bump [packet-forward-middleware](https://github.com/strangelove-ventures/packet-forward-middleware) module to [v2.1.1](https://github.com/strangelove-ventures/packet-forward-middleware/releases/tag/v2.1.1).
+- (gaia) add migration logs for upgrade process.
 
-- Fix: Make events in reply completely determinisitic by stripping out anything coming from Cosmos SDK (not CosmWasm codebase) [\#917](https://github.com/psangwoo/parkd/pull/917) ([assafmo](https://github.com/assafmo))
+## [v6.0.4] - 2022-03-10
 
-Migration notes:
+* (gaia) Bump [Liquidity](https://github.com/gravity-devs/liquidity) module to [v1.4.6](https://github.com/Gravity-Devs/liquidity/releases/tag/v1.4.6).
+* (gaia) Bump [IBC](https://github.com/cosmos/ibc-go) module to [2.0.3](https://github.com/cosmos/ibc-go/releases/tag/v2.0.3).
+* (gaia) [#1230](https://github.com/cosmos/gaia/pull/1230) Fix: update gRPC Web Configuration in `contrib/testnets/test_platform`.
+* (gaia) [#1135](https://github.com/cosmos/gaia/pull/1135) Fix rocksdb build tag usage.
+* (gaia) [#1160](https://github.com/cosmos/gaia/pull/1160) Improvement: update state sync configs.
+* (gaia) [#1208](https://github.com/cosmos/gaia/pull/1208) Update statesync.bash.
+* * (gaia) Bump [Cosmos-SDK](https://github.com/cosmos/cosmos-sdk) to [v0.44.6](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.44.6)
+* (gaia) Bump [Versions](https://github.com/cosmos/gaia/pull/1100) of various smaller dependencies, remove the Cosmos SDK replace statement, update `initiClientCtx` params, ensure `stdout` and `stderr` are handled correctly in the CLI.
 
-* Contracts can no longer parse events from any calls except if they call another contract (or instantiate it, migrate it, etc).
-The main issue here is likely "Custom" queries from a blockchain, which want to send info (eg. how many tokens were swapped).
-Since those custom bindings are maintained by the chain, they can use the data field to pass any deterministic information
-back to the contract. We recommend using JSON encoding there with some documented format the contracts can parse out easily.
-* For possible non-determinism issues, we also sort all attributes in events. Better safe than sorry.
+## [v6.0.3] - 2022-02-18
+ * This is a reverted release that is the same as v6.0.0
 
-## [v0.27.0](https://github.com/psangwoo/parkd/tree/v0.27.0) (2022-05-19)
+## [v6.0.2] - 2022-02-17
+ * Unusable release
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.26.0...v0.27.0)
+## [v6.0.1] - 2022-02-10
+ * Unusable release
 
-**API Breaking**
-Yes
+## [v6.0.0] - 2021-11-24
 
-**Fixed bugs:**
+ * (gaia) Add NewSetUpContextDecorator to anteDecorators
+ * (gaia) Reconfigure SetUpgradeHandler to ensure vesting is configured after auth and new modules have InitGenesis run.
+ * (golang) Bump golang prerequisite to 1.17. 
+ * (gaia) Bump [Liquidity](https://github.com/gravity-devs/liquidity) module to [v1.4.2](https://github.com/Gravity-Devs/liquidity/releases/tag/v1.4.2).
+ * (gaia) Bump [Cosmos SDK](https://github.com/cosmos/cosmos-sdk) to [v0.44.3](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.44.3). See the [CHANGELOG.md](https://github.com/cosmos/cosmos-sdk/blob/release/v0.44.x/CHANGELOG.md#v0443---2021-10-21) for details.
+ * (gaia) Add [IBC](https://github.com/cosmos/ibc-go) as a standalone module from the Cosmos SDK using version [v2.0.0](https://github.com/cosmos/ibc-go/releases/tag/v2.0.0). See the [CHANGELOG.md](https://github.com/cosmos/ibc-go/blob/v2.0.0/CHANGELOG.md) for details.
+ * (gaia) Add [packet-forward-middleware](https://github.com/strangelove-ventures/packet-forward-middleware) [v1.0.1](https://github.com/strangelove-ventures/packet-forward-middleware/releases/tag/v1.0.1).
+ * (gaia) [#969](https://github.com/cosmos/gaia/issues/969) Remove legacy migration code.
 
-- Fix: allow no admin in instantiation through proposal [\#828](https://github.com/psangwoo/parkd/pull/828) ([jhernandezb](https://github.com/jhernandezb))
-- Fix SudoContractProposal and ExecuteContractProposal [\#808](https://github.com/psangwoo/parkd/pull/808) ([the-frey](https://github.com/the-frey))
+## [v5.0.8] - 2021-10-14
 
-**Implemented Enhancements**
-- Add UpdateInstantiateConfig governance proposal [\#820](https://github.com/psangwoo/parkd/pull/796) ([jhernandezb](https://github.com/jhernandezb))
-- Upgrade wasmvm to v1.0.0 [\#844](https://github.com/psangwoo/parkd/pull/844) and [\#858](https://github.com/psangwoo/parkd/pull/858)
-- Support state sync [\#478](https://github.com/psangwoo/parkd/issues/478)
-- Upgrade to ibc-go v3 [\#806](https://github.com/psangwoo/parkd/issues/806)
-- Initial ICA integration [\#837](https://github.com/psangwoo/parkd/pull/837) ([ethanfrey](https://github.com/ethanfrey))
-- Consolidate MaxWasmSize constraints into a single var [\#826](https://github.com/psangwoo/parkd/pull/826)
-- Add AccessConfig to CodeInfo query response [\#829](https://github.com/psangwoo/parkd/issues/829)
-- Bump sdk to v0.45.4 [\#818](https://github.com/psangwoo/parkd/pull/818) ([alpe](https://github.com/alpe))
-- Bump buf docker image to fix proto generation issues [\#820](https://github.com/psangwoo/parkd/pull/820) ([alpe](https://github.com/alpe))
-- Add MsgStoreCode and MsgInstantiateContract support to simulations [\#831](https://github.com/psangwoo/parkd/pull/831) ([pinosu](https://github.com/pinosu))
+* (gaia) This release includes a new AnteHandler that rejects redundant IBC transactions to save relayers fees.
 
-**Implemented Enhancements**
+## [v5.0.8] - 2021-10-14
 
-- Make MaxLabelSize a var not const [\#822](https://github.com/psangwoo/parkd/pull/822)
+* (gaia) This release includes a new AnteHandler that rejects redundant IBC transactions to save relayers fees.
 
-## [v0.26.0](https://github.com/psangwoo/parkd/tree/v0.26.0) (2022-04-21)
+## [v5.0.7] - 2021-09-30
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.25.0...v0.26.0)
+  * (gaia) Bump Cosmos SDK to 0.42.10
 
-**Fixed bugs:**
+## [v5.0.6] - 2021-09-16
 
-- Unpack contract details from genesis [\#802](https://github.com/psangwoo/parkd/pull/802)
+ * (gaia) Bump tendermint to 0.34.13
 
-**Closed issues:**
+ 
+## [v5.0.5] - 2021-08-05
 
-- Issue Updating uploadAccess Param [\#804](https://github.com/psangwoo/parkd/issues/804)
-- Add tx query to wasmd QueryPlugins for smart contract [\#788](https://github.com/psangwoo/parkd/issues/788)
+ * (gaia) Bump SDK to [0.42.9](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.42.9) to resolve IBC channel restart issue ([9800](https://github.com/cosmos/cosmos-sdk/issues/9800)).
 
-**Merged pull requests:**
+## [v5.0.4] - 2021-07-31
+ * (chore) Fix release to include intended items from `v5.0.3`.
 
-- Disable stargate queries [\#812](https://github.com/psangwoo/parkd/pull/812)
-- Gov param change examples [\#805](https://github.com/psangwoo/parkd/pull/805)
-- Create link to SECURITY.md in other repo [\#801](https://github.com/psangwoo/parkd/pull/801)
-- Tests some event edge cases [\#799](https://github.com/psangwoo/parkd/pull/799)
+## [v5.0.3] - 2021-07-30
 
-## [v0.25.0](https://github.com/psangwoo/parkd/tree/v0.25.0) (2022-04-06)
+* (gaia) Bump SDK to [0.42.8](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.42.8) to resolve tx query issues.
+* (gaia) Bump SDK to [0.42.7](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.42.7) to resolve state sync issues.
 
-**API Breaking**
-- Upgrade wasmvm to v1.0.0-beta10 [\#790](https://github.com/psangwoo/parkd/pull/790), [\#800](https://github.com/psangwoo/parkd/pull/800)
+## [v5.0.2] - 2021-07-15
 
-**Implemented Enhancements**
-- Fix: close iterators [\#792](https://github.com/psangwoo/parkd/pull/792)
-- Use callback pattern for contract state iterator [\#794](https://github.com/psangwoo/parkd/pull/794)
-- Bump github.com/stretchr/testify from 1.7.0 to 1.7.1 [\#787](https://github.com/psangwoo/parkd/pull/787)
-- Bump github.com/cosmos/ibc-go/v2 from 2.0.3 to 2.2.0 [\#786](https://github.com/psangwoo/parkd/pull/786)
+* (gaia) Fix misspelling in RELEASE.md
+* (gaia) Add releases to .gitignore
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.24.0...v0.25.0)
+## [v5.0.1] - 2021-07-15
 
-## [v0.24.0](https://github.com/psangwoo/parkd/tree/v0.24.0) (2022-03-09)
+* (gaia) Configure gaiad command to add back `config` capabilities.
 
-**API Breaking**
-- Add cosmwasm project prefix to REST query paths [\#743](https://github.com/psangwoo/parkd/issues/743)
-- Add support for old contract addresses of length 20 [\#758](https://github.com/psangwoo/parkd/issues/758)
-- Update wasmvm to 1.0.0-beta7 (incl wasmer 2.2) [\#774](https://github.com/psangwoo/parkd/issues/774)
+## [v5.0.0] - 2021-06-28
 
-**Fixed bugs**
-- Add missing colons in String of some proposals [\#752](https://github.com/psangwoo/parkd/pull/752)
-- Replace custom codec with SDK codec (needed for rosetta) [\#760](https://github.com/psangwoo/parkd/pull/760)
-- Support `--no-admin` flag on cli for gov instantiation [\#771](https://github.com/psangwoo/parkd/pull/771)
+* (golang) Bump golang prerequisite from 1.15 to 1.16.
+* (gaia) Add [Liquidity](https://github.com/gravity-devs/liquidity) module [v1.2.9](https://github.com/Gravity-Devs/liquidity/releases/tag/v1.2.9).
+* (sdk)  Bump SDK version to [v0.42.6](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.42.6).
+* (tendermint) Bump Tendermint version to [v0.34.11](https://github.com/tendermint/tendermint/releases/tag/v0.34.11).
 
-**Implemented Enhancements**
-- Add support for Buf Build [\#753](https://github.com/psangwoo/parkd/pull/753), [\#755](https://github.com/psangwoo/parkd/pull/755), [\#756](https://github.com/psangwoo/parkd/pull/756)
-- Redact most errors sent to contracts, for better determinism guarantees [\#765](https://github.com/psangwoo/parkd/pull/765), [\#775](https://github.com/psangwoo/parkd/pull/775)
+## [v4.2.1] - 2021-04-08
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.23.0...v0.24.0)
+A critical security vulnerability was identified in Tendermint Core, which impacts Tendermint Lite Client.
 
-## [v0.23.0](https://github.com/psangwoo/parkd/tree/v0.23.0) (2022-01-28)
+This release fixes the identified security vulnerability.
 
-**Fixed bugs**
-- Set end block order [\#736](https://github.com/psangwoo/parkd/issues/736)
+### Bug Fixes
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.22.0...v0.23.0)
+* (sdk)  Bump SDK version to [v0.42.4](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.42.4)
+* (tendermint) Bump Tendermint version to [v0.34.9](https://github.com/tendermint/tendermint/releases/tag/v0.34.9).
 
-## [v0.22.0](https://github.com/psangwoo/parkd/tree/v0.22.0) (2022-01-20)
+## [v4.2.0] - 2021-03-25
 
-**Api Breaking:**
-- Upgrade to cosmos-sdk v0.45.0 [\#717](https://github.com/psangwoo/parkd/pull/717)
-- Upgrade wasmvm to v1.0.0-beta5 [\#714](https://github.com/psangwoo/parkd/pull/714)
+A critical security vulnerability has been identified in Gaia v4.1.x.
+User funds are NOT at risk; however, the vulnerability can result in a chain halt.
 
-**Implemented Enhancements:**
-- Use proper SystemError::NoSuchContract on ContractInfo if missing [\#687](https://github.com/psangwoo/parkd/issues/687)
-- Benchmark tests flickering: directory not empty [\#659](https://github.com/psangwoo/parkd/issues/659)
-- Implement PinCode and UnpinCode proposal client handlers [\#707](https://github.com/psangwoo/parkd/pull/707) ([orkunkl](https://github.com/orkunkl))
-- Use replace statements to enforce consistent versioning. [\#692](https://github.com/psangwoo/parkd/pull/692) ([faddat](https://github.com/faddat))
-- Fixed circleci by removing the golang executor from a docker build
-- Go 1.17 provides a much clearer go.mod file [\#679](https://github.com/psangwoo/parkd/pull/679) ([faddat](https://github.com/faddat))
-- Autopin wasm code uploaded by gov proposal [\#726](https://github.com/psangwoo/parkd/pull/726) ([ethanfrey](https://github.com/ethanfrey))
-- You must explicitly declare --no-admin on cli instantiate if that is what you want [\#727](https://github.com/psangwoo/parkd/pull/727) ([ethanfrey](https://github.com/ethanfrey))
-- Add governance proposals for Wasm Execute and Sudo [\#730](https://github.com/psangwoo/parkd/pull/730) ([ethanfrey](https://github.com/ethanfrey))
-- Remove unused run-as flag from Wasm Migrate proposals [\#730](https://github.com/psangwoo/parkd/pull/730) ([ethanfrey](https://github.com/ethanfrey))
-- Expose wasm/Keeper.SetParams [\#732](https://github.com/psangwoo/parkd/pull/732) ([ethanfrey](https://github.com/ethanfrey))
+This release fixes the identified security vulnerability.
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.21.0...v0.22.0)
+If the chain halts before or during the upgrade, validators with sufficient voting power need to upgrade
+and come online in order for the chain to resume.
 
+### Bug Fixes
 
-## [v0.21.0](https://github.com/psangwoo/parkd/tree/v0.21.0) (2021-11-17)
+* (sdk)  Bump SDK version to [v0.42.3](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.42.3)
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.20.0...v0.21.0)
+## [v4.1.2] - 2021-03-22
 
-**Fixed bugs + Api Breaking:**
-- Prevent infinite gas consumption in simulation queries [\#670](https://github.com/psangwoo/parkd/issues/670)
-- Amino JSON representation of inner message in Msg{Instantiate,Migrate,Execute}Contract [\#642](https://github.com/psangwoo/parkd/issues/642)
+This release removes unnecessary dependencies.
 
-**Implemented Enhancements:**
-- Bump wasmvm to v1.0.0-beta2 [\#676](https://github.com/psangwoo/parkd/pull/676)
-- Add Benchmarks to compare with native modules [\#635](https://github.com/psangwoo/parkd/issues/635)
-- Document M1 is not supported [\#653](https://github.com/psangwoo/parkd/issues/653)
-- Open read access to sequences [\#669](https://github.com/psangwoo/parkd/pull/669)
-- Remove unused flags from command prompt for storing contract [\#647](https://github.com/psangwoo/parkd/issues/647)
-- Ran `make format` [\#649](https://github.com/psangwoo/parkd/issues/649)
-- Add golangci lint check to circleci jobs [\620](https://github.com/psangwoo/parkd/issues/620)
-- Updated error log statements in initGenesis for easier debugging: [\#643](https://github.com/psangwoo/parkd/issues/643)
-- Bump github.com/cosmos/iavl from 0.17.1 to 0.17.2 [\#673](https://github.com/psangwoo/parkd/pull/673)
-- Bump github.com/rs/zerolog from 1.25.0 to 1.26.0 [\#666](https://github.com/psangwoo/parkd/pull/666)
-
-## [v0.20.0](https://github.com/psangwoo/parkd/tree/v0.20.0) (2021-10-08)
-
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.19.0...v0.20.0)
-
-**Fixed bugs:**
-
-- Add capabilities to begin block [\#626](https://github.com/psangwoo/parkd/pull/626)
-
-**Api Breaking:**
-- Update to wasmvm 1.0.0-soon2 [\#624](https://github.com/psangwoo/parkd/issues/624)
-
-**Implemented Enhancements:**
-
-- Upgrade Cosmos-sdk v0.42.10 [\#627](https://github.com/psangwoo/parkd/pull/627) ([alpe](https://github.com/alpe))
-- Add transaction index implemented as counter [\#601](https://github.com/psangwoo/parkd/issues/601)
-- Fix inconsistent return of `contractAddress` from `keeper/init()`? [\#616](https://github.com/psangwoo/parkd/issues/616)
-- Query pinned wasm codes [\#596](https://github.com/psangwoo/parkd/issues/596)
-- Doc IBC Events [\#593](https://github.com/psangwoo/parkd/issues/593)
-- Allow contract Info query from the contract [\#584](https://github.com/psangwoo/parkd/issues/584)
-- Revisit reply gas costs for submessages. [\#450](https://github.com/psangwoo/parkd/issues/450)
-- Benchmarks for gas pricing [\#634](https://github.com/psangwoo/parkd/pull/634)
-- Treat all contracts as pinned for gas costs in reply [\#630](https://github.com/psangwoo/parkd/pull/630)
-- Bump github.com/spf13/viper from 1.8.1 to 1.9.0 [\#615](https://github.com/psangwoo/parkd/pull/615)
-
-## [v0.19.0](https://github.com/psangwoo/parkd/tree/v0.19.0) (2021-09-15)
-
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.18.0...v0.19.0)
-
-**Fixed bugs:**
-
-- Ensure Queries are executed read only [\#610](https://github.com/psangwoo/parkd/issues/610)
-- Fix bug in query handler initialization on reply [\#604](https://github.com/psangwoo/parkd/issues/604)
-
-**Api Breaking:**
-- Bump Go version to  1.16 [\#612](https://github.com/psangwoo/parkd/pull/612)
-
-**Implemented Enhancements:**
-
-- Ensure query isolation [\#611](https://github.com/psangwoo/parkd/pull/611)
-- Optimize BalanceQuery [\#609](https://github.com/psangwoo/parkd/pull/609)
-- Bump wasmvm to v0.16.1 [\#605](https://github.com/psangwoo/parkd/pull/605)
-- Bump github.com/rs/zerolog from 1.23.0 to 1.25.0 [\#603](https://github.com/psangwoo/parkd/pull/603)
-- Add decorator options [\#598](https://github.com/psangwoo/parkd/pull/598)
-- Bump github.com/spf13/cast from 1.4.0 to 1.4.1 [\#592](https://github.com/psangwoo/parkd/pull/592)
+### Bug Fixes
 
-## [v0.18.0](https://github.com/psangwoo/parkd/tree/v0.18.0) (2021-08-16)
+* (gaia)  [\#781](https://github.com/cosmos/gaia/pull/781) Remove unnecessary dependencies
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.17.0...v0.18.0)
+## [v4.1.1] - 2021-03-19
 
-**Api Breaking:**
-- Events documented and refactored [\#448](https://github.com/psangwoo/parkd/issues/448), [\#589](https://github.com/psangwoo/parkd/pull/589), [\#587](https://github.com/psangwoo/parkd/issues/587)
-- Add organisation to grpc gateway path [\#578](https://github.com/psangwoo/parkd/pull/578)
-- Move Proto version from `v1beta1` to `v1` for all cosmwasm.wasm.* types
-  [\#563](https://github.com/psangwoo/parkd/pull/563)
-- Renamed InitMsg and MigrateMsg fields to Msg. This applies to protobuf Msg
-  and Proposals, as well as REST and CLI [\#563](https://github.com/psangwoo/parkd/pull/563)
-- Removed source and builder fields from StoreCode and CodeInfo. They were rarely used.
-  [\#564](https://github.com/psangwoo/parkd/pull/564)  
-- Changed contract address derivation function. If you hardcoded the first contract
-  addresses anywhere (in scripts?), please update them.
-  [\#565](https://github.com/psangwoo/parkd/pull/565)
+This release bring improvements to keyring UX, tx search results, and multi-sig account migrations.
+See the Cosmos SDK [release notes](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.42.2) for details.
 
-**Implemented Enhancements:**
-- Cosmos SDK 0.42.9, wasmvm 0.16.0 [\#582](https://github.com/psangwoo/parkd/pull/582) 
-- Better ibc contract interface [\#570](https://github.com/psangwoo/parkd/pull/570) ([ethanfrey](https://github.com/ethanfrey))
-- Reject invalid events/attributes returned from contracts [\#560](https://github.com/psangwoo/parkd/pull/560)
-- IBC Query methods from Wasm contracts only return OPEN channels [\#568](https://github.com/psangwoo/parkd/pull/568)
-- Extendable gas costs [\#525](https://github.com/psangwoo/parkd/issues/525)
-- Limit init/migrate/execute payload message size [\#203](https://github.com/psangwoo/parkd/issues/203)
-- Add cli alias [\#496](https://github.com/psangwoo/parkd/issues/496)
-- Remove max gas limit [\#529](https://github.com/psangwoo/parkd/pull/529) ([alpe](https://github.com/alpe))
-- Add SECURITY.md [\#303](https://github.com/psangwoo/parkd/issues/303)
+### Bug Fixes
 
-## [v0.17.0](https://github.com/psangwoo/parkd/tree/v0.17.0) (2021-05-26)
+* (sdk)  Bump SDK version to [v0.42.2](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.42.2)
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.16.0...v0.17.0)
+## [v4.1.0] - 2021-03-10
 
-**Features:**
-- Remove json type cast for contract msgs [\#520](https://github.com/psangwoo/parkd/pull/520) ([alpe](https://github.com/alpe))
-- Bump github.com/cosmos/cosmos-sdk from 0.42.4 to 0.42.5 [\#519](https://github.com/psangwoo/parkd/pull/519) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+### Bug Fixes
 
-## [v0.16.0](https://github.com/psangwoo/parkd/tree/v0.16.0) (2021-04-30)
+A critical security vulnerability has been identified in Gaia v4.0.x.
+User funds are NOT at risk; however, the vulnerability can result in a chain halt.
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.15.1...v0.16.0)
+This release fixes the identified security vulnerability.
 
-**Features:**
-- Upgrade to wasmvm v0.14.0-rc1 [\#508](https://github.com/psangwoo/parkd/pull/508) ([alpe](https://github.com/alpe))
-- Use the cache metrics from WasmVM [\#500](https://github.com/psangwoo/parkd/issues/500)
-- Update IBC.md [\#494](https://github.com/psangwoo/parkd/pull/494) ([ethanfrey](https://github.com/ethanfrey))
-- Extend ContractInfo for custom data [\#492](https://github.com/psangwoo/parkd/pull/492) ([alpe](https://github.com/alpe))
-- Reply response on submessages can overwrite "caller" result [\#495](https://github.com/psangwoo/parkd/issues/495)
-- Update to sdk 0.42.4 [\#485](https://github.com/psangwoo/parkd/issues/485)
-- Add extension points to the CLI [\#477](https://github.com/psangwoo/parkd/pull/477) ([alpe](https://github.com/alpe))
-- Simplify staking reward query [\#399](https://github.com/psangwoo/parkd/issues/399)
-- Update IBC.md [\#398](https://github.com/psangwoo/parkd/issues/398)
-- Add IBCQuery support [\#434](https://github.com/psangwoo/parkd/issues/434)
-- Follow proto dir best practice \(in cosmos eco\) [\#342](https://github.com/psangwoo/parkd/issues/342)
-- Remove internal package [\#464](https://github.com/psangwoo/parkd/pull/464) ([alpe](https://github.com/alpe))
-- Introduce new interfaces for extendability [\#471](https://github.com/psangwoo/parkd/pull/471) ([alpe](https://github.com/alpe))
-- Handle non default IBC transfer port in message encoder [\#396](https://github.com/psangwoo/parkd/issues/396)
-- Collect Contract Metrics [\#387](https://github.com/psangwoo/parkd/issues/387)
-- Add Submessages for IBC callbacks [\#449](https://github.com/psangwoo/parkd/issues/449)
-- Handle wasmvm Burn message [\#489](https://github.com/psangwoo/parkd/pull/489) ([alpe](https://github.com/alpe))
-- Add telemetry [\#463](https://github.com/psangwoo/parkd/pull/463) ([alpe](https://github.com/alpe))
-- Handle non default transfer port id [\#462](https://github.com/psangwoo/parkd/pull/462) ([alpe](https://github.com/alpe))
-- Allow subsecond block times [\#453](https://github.com/psangwoo/parkd/pull/453) ([ethanfrey](https://github.com/ethanfrey))
-- Submsg and replies [\#441](https://github.com/psangwoo/parkd/pull/441) ([ethanfrey](https://github.com/ethanfrey))
-- Ibc query support [\#439](https://github.com/psangwoo/parkd/pull/439) ([ethanfrey](https://github.com/ethanfrey))
-- Pin/Unpin contract in cache [\#436](https://github.com/psangwoo/parkd/pull/436) ([alpe](https://github.com/alpe))
-- Stargate msg and query [\#435](https://github.com/psangwoo/parkd/pull/435) ([ethanfrey](https://github.com/ethanfrey))
-- Sudo entry point [\#433](https://github.com/psangwoo/parkd/pull/433) ([ethanfrey](https://github.com/ethanfrey))
-- Add custom message handler option [\#402](https://github.com/psangwoo/parkd/pull/402) ([alpe](https://github.com/alpe))
-- Expose contract pinning [\#401](https://github.com/psangwoo/parkd/issues/401)
-- Add support for Stargate CosmosMsg/QueryRequest [\#388](https://github.com/psangwoo/parkd/issues/388)
-- Add MsgInstantiateContractResponse.data [\#385](https://github.com/psangwoo/parkd/issues/385)
-- Added randomized simulation parameters generation [\#389](https://github.com/psangwoo/parkd/pull/389) ([bragaz](https://github.com/bragaz))
-- Implement IBC contract support [\#394](https://github.com/psangwoo/parkd/pull/394) ([alpe](https://github.com/alpe))
+If the chain halts before or during the upgrade, validators with sufficient voting power need to upgrade
+and come online in order for the chain to resume.
 
-**Api breaking:**
-- Improve list contracts by code query [\#497](https://github.com/psangwoo/parkd/pull/497) ([alpe](https://github.com/alpe))
-- Rename to just `funds` [/#423](https://github.com/psangwoo/parkd/issues/423)
+## [v4.0.6] - 2021-03-09
 
-**Fixed bugs:**
+### Bug Fixes
 
-- Correct order for migrated contracts [\#323](https://github.com/psangwoo/parkd/issues/323)
-- Keeper Send Coins does not perform expected validation [\#414](https://github.com/psangwoo/parkd/issues/414)
+This release bumps the Cosmos SDK, which includes an important security fix for all non
+Cosmos Hub chains (e.g. any chain that does not use the default cosmos bech32 prefix),
+and a few performance improvements. The SDK also applies a security fix for validator
+address conversion in evidence handling, and the full header is now emitted on an
+IBC UpdateClient message event.
 
-## [v0.15.1](https://github.com/psangwoo/parkd/tree/v0.15.1) (2021-02-18)
+* (sdk)  Bump SDK version to [v0.42.0](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.42.0)
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.15.0...v0.15.1)
+## [v4.0.5] - 2021-03-02
 
-**Implemented enhancements:**
+### Bug Fixes
 
-- Support custom MessageHandler in wasm [\#327](https://github.com/psangwoo/parkd/issues/327)
+* (tendermint) Bump Tendermint version to [v0.34.8](https://github.com/tendermint/tendermint/releases/tag/v0.34.8).
+* (sdk)  Bump SDK version to [v0.41.4](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.41.4), which reduces startup time with the cosmoshub-4 mainnet genesis without invariant checks.
 
-**Fixed bugs:**
+## [v4.0.4] - 2021-02-19
 
-- Fix Parameter change via proposal  [\#392](https://github.com/psangwoo/parkd/issues/392)
+### Bug Fixes
 
-## [v0.15.0](https://github.com/psangwoo/parkd/tree/v0.15.0) (2021-01-27)
+This release applies a patched version to grpc dependencies in order to resolve some queries; no explicit version bumps are included.
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.14.1...v0.15.0)
+## [v4.0.3] - 2021-02-18
 
-**Features:**
-- Upgrade to cosmos-sdk v0.41.0 [\#390](https://github.com/psangwoo/parkd/pull/390)
+### Bug Fixes
 
-## [v0.14.1](https://github.com/psangwoo/parkd/tree/v0.14.1) (2021-01-20)
+This release fixes build failures caused by a small API breakage introduced in tendermint v0.34.7.
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.14.0...v0.14.1)
+* (sdk)  Bump SDK version to [v0.41.3](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.41.3).
 
-**Features:**
-- Upgrade to cosmos-sdk v0.40.1 final + Tendermint 0.34.3 [\#380](https://github.com/psangwoo/parkd/pull/380)
+## [v4.0.2] - 2021-02-18
 
-## [v0.14.0](https://github.com/psangwoo/parkd/tree/v0.14.0) (2021-01-11)
+### Bug Fixes
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.13.0...v0.14.0)
+This release fixes a downstream security issue which impacts Cosmos SDK users.
+See the [Tendermint v0.34.7 SDK changelog](https://github.com/tendermint/tendermint/blob/v0.34.x/CHANGELOG.md#v0347) for details.
 
-**Features:**
-- Upgrade to cosmos-sdk v0.40.0 final [\#354](https://github.com/psangwoo/parkd/pull/369)
-- Refactor to GRPC message server [\#366](https://github.com/psangwoo/parkd/pull/366)
-- Make it easy to initialize contracts in genesis file with new CLI commands[\#326](https://github.com/psangwoo/parkd/issues/326)
-- Upgrade to WasmVM v0.13.0 [\#358](https://github.com/psangwoo/parkd/pull/358)
-- Upgrade to cosmos-sdk v0.40.0-rc6 [\#354](https://github.com/psangwoo/parkd/pull/354)
-- Upgrade to cosmos-sdk v0.40.0-rc5 [\#344](https://github.com/psangwoo/parkd/issues/344)
-- Add Dependabot to keep dependencies secure and up-to-date [\#336](https://github.com/psangwoo/parkd/issues/336)
+* (sdk) [\#640](https://github.com/cosmos/gaia/pull/640) Bump SDK version to [v0.41.2](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.41.2).
+* (tendermint) [\#640](https://github.com/cosmos/gaia/pull/640) Bump Tendermint version to [v0.34.7](https://github.com/tendermint/tendermint/releases/tag/v0.34.7).
 
-**Fixed bugs:**
+## [v4.0.1] - 2021-02-17
 
-- Dependabot can't resolve your Go dependency files [\#339](https://github.com/psangwoo/parkd/issues/339)
-- Errors in `InitGenesis` [\#335](https://github.com/psangwoo/parkd/issues/335)
-- Invalid homeDir for export command [\#334](https://github.com/psangwoo/parkd/issues/334)
+### Bug Fixes
 
-## [v0.13.0](https://github.com/psangwoo/parkd/tree/v0.13.0) (2020-12-04)
+* (sdk) [\#579](https://github.com/cosmos/gaia/pull/635) Bump SDK version to [v0.41.1](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.41.1).
+* (tendermint) [\#622](https://github.com/cosmos/gaia/pull/622) Bump Tendermint version to [v0.34.4](https://github.com/tendermint/tendermint/releases/tag/v0.34.4).
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.12.1...v0.13.0)
+## [v4.0.0] - 2021-01-26
 
-**Fixed bugs:**
+### Improvements
 
-- REST handler wrong `Sender` source [\#324](https://github.com/psangwoo/parkd/issues/324)
+* (app) [\#564](https://github.com/cosmos/gaia/pull/564) Add client denomination metadata for atoms.
 
-**Closed issues:**
+### Bug Fixes
 
-- Change proto package to match \<organisation\>.\<module\>.\<version\> [\#329](https://github.com/psangwoo/parkd/issues/329)
-- Out of gas causes panic when external contract store query executed [\#321](https://github.com/psangwoo/parkd/issues/321)
-- Check codecov report [\#298](https://github.com/psangwoo/parkd/issues/298)
-- cosmwasm.GoAPI will not work on sdk.ValAddress [\#264](https://github.com/psangwoo/parkd/issues/264)
-- Stargate: Add pagination support for queries [\#242](https://github.com/psangwoo/parkd/issues/242)
+* (cmd) [\#563](https://github.com/cosmos/gaia/pull/563) Add balance coin to supply when adding a new genesis account
+* (sdk) [\#579](https://github.com/cosmos/gaia/pull/579) Bump SDK version to [v0.41.0](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.41.0).
 
-**Merged pull requests:**
+## [v3.0.1] - 2021-01-19
 
-- Rename protobuf package [\#330](https://github.com/psangwoo/parkd/pull/330) ([alpe](https://github.com/alpe))
-- Use base request data for sender [\#325](https://github.com/psangwoo/parkd/pull/325) ([alpe](https://github.com/alpe))
-- Handle panics in query contract smart [\#322](https://github.com/psangwoo/parkd/pull/322) ([alpe](https://github.com/alpe))
+### Improvements
 
-## [v0.12.1](https://github.com/psangwoo/parkd/tree/v0.12.1) (2020-11-23)
+* (protobuf) [\#553](https://github.com/cosmos/gaia/pull/553) Bump gogo protobuf deps to v1.3.3
+* (github) [\#543](https://github.com/cosmos/gaia/pull/543) Add docker deployment
+* (starport) [\#535](https://github.com/cosmos/gaia/pull/535) Add config.yml
+* (docker) [\#534](https://github.com/cosmos/gaia/pull/534) Update to python3
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.12.0...v0.12.1)
+### Bug Fixes
 
-**Closed issues:**
+* (sdk) Bump SDK version to [v0.40.1](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.40.1).
+* (tendermint) Bump Tendermint version to [v0.34.3](https://github.com/tendermint/tendermint/releases/tag/v0.34.3).
+* (github) [\#544](https://github.com/cosmos/gaia/pull/544) Deploy from main not master
+* (docs) [\#550](https://github.com/cosmos/gaia/pull/550) Bump vuepress-theme-cosmos to 1.0.180
+* (docker) [\#537](https://github.com/cosmos/gaia/pull/537) Fix single-node.sh setup script
 
-- Complete IBC Mock testing [\#255](https://github.com/psangwoo/parkd/issues/255)
-- Idea: do multiple queries in one API call [\#72](https://github.com/psangwoo/parkd/issues/72)
+## [v3.0.0] - 2021-01-09
 
-**Merged pull requests:**
+### Improvements
 
-- Exclude generate proto code files in coverage [\#320](https://github.com/psangwoo/parkd/pull/320) ([alpe](https://github.com/alpe))
-- Upgrade wasmvm to 0.12.0 [\#319](https://github.com/psangwoo/parkd/pull/319) ([webmaster128](https://github.com/webmaster128))
-- Fix chain id setup in contrib/local/setup\_wasmd.sh [\#318](https://github.com/psangwoo/parkd/pull/318) ([orkunkl](https://github.com/orkunkl))
-- Add pagination to grpc queries [\#317](https://github.com/psangwoo/parkd/pull/317) ([alpe](https://github.com/alpe))
+* (sdk) Bump SDK version to [v0.40.0](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.40.0).
+* (tendermint) Bump Tendermint version to [v0.34.1](https://github.com/tendermint/tendermint/releases/tag/v0.34.1).
 
-## [v0.12.0](https://github.com/psangwoo/parkd/tree/v0.12.0) (2020-11-17)
+## [v2.0.14] - 2020-12-10
 
-[Full Changelog](https://github.com/psangwoo/parkd/compare/v0.12.0-alpha1...v0.12.0)
+* (sdk) Bump SDK version to [v0.37.15](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.15).
+* (tendermint) Bump Tendermint version to [v0.32.14](https://github.com/tendermint/tendermint/releases/tag/v0.32.14).
 
-**Closed issues:**
+## [v2.0.13] - 2020-08-13
 
-- Merge wasmd and wasmcli into a single binary [\#308](https://github.com/psangwoo/parkd/issues/308)
-- Change bech32 prefix for wasmd [\#313](https://github.com/psangwoo/parkd/issues/313)
-- Upgrade go-cowasmwasm to wasmvm 0.12 [\#309](https://github.com/psangwoo/parkd/issues/309)
-- Use string type for AccAddresses in proto  [\#306](https://github.com/psangwoo/parkd/issues/306)
-- Upgrade to cosmos/sdk v0.40.0-rc2 [\#296](https://github.com/psangwoo/parkd/issues/296)
-- Generate protobuf outputs in a container [\#295](https://github.com/psangwoo/parkd/issues/295)
-- Instantiate contract process ordering [\#292](https://github.com/psangwoo/parkd/issues/292)
-- Make Wasm maxSize a configuration option [\#289](https://github.com/psangwoo/parkd/issues/289)
-- Return error if wasm to big [\#287](https://github.com/psangwoo/parkd/issues/287)
+* (sdk) Bump SDK version to [v0.37.14](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.14).
 
-**Merged pull requests:**
+## [v2.0.12] - 2020-08-13
 
-- Set bech32 prefix [\#316](https://github.com/psangwoo/parkd/pull/316) ([alpe](https://github.com/alpe))
-- Replace sdk.AccAddress with bech32 string [\#314](https://github.com/psangwoo/parkd/pull/314) ([alpe](https://github.com/alpe))
-- Integrate wasmcli into wasmd [\#312](https://github.com/psangwoo/parkd/pull/312) ([alpe](https://github.com/alpe))
-- Upgrade wasmvm aka go-cosmwasm [\#311](https://github.com/psangwoo/parkd/pull/311) ([alpe](https://github.com/alpe))
-- Upgrade to Stargate RC3 [\#305](https://github.com/psangwoo/parkd/pull/305) ([alpe](https://github.com/alpe))
-- Containerized Protobuf generation  [\#304](https://github.com/psangwoo/parkd/pull/304) ([alpe](https://github.com/alpe))
-- Reject wasm code exceeding limit  [\#302](https://github.com/psangwoo/parkd/pull/302) ([alpe](https://github.com/alpe))
-- Support self calling contract on instantiation [\#300](https://github.com/psangwoo/parkd/pull/300) ([alpe](https://github.com/alpe))
-- Upgrade to Stargate RC2 [\#299](https://github.com/psangwoo/parkd/pull/299) ([alpe](https://github.com/alpe))
+* This version did not contain the update to [v0.37.14](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.14). Please use v2.0.13
+
+## [v2.0.11] - 2020-05-06
+
+* (sdk) Bump SDK version to [v0.37.13](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.13).
+
+## [v2.0.10] - 2020-05-06
+
+* (sdk) Bump SDK version to [v0.37.12](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.12).
+
+## [v2.0.9] - 2020-04-23
+
+* (sdk) Bump SDK version to [v0.37.11](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.11).
+
+## [v2.0.8] - 2020-04-09
+
+### Improvements
+
+* (sdk) Bump SDK version to [v0.37.9](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.9).
+
+## [v2.0.7] - 2020-03-11
+
+### Improvements
+
+* (sdk) Bump SDK version to [v0.37.8](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.8).
+
+## [v2.0.6] - 2020-02-10
+
+### Improvements
+
+* (sdk) Bump SDK version to [v0.37.7](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.7).
+
+## [v2.0.5] - 2020-01-21
+
+### Improvements
+
+* (sdk) Bump SDK version to [v0.37.6](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.6).
+* (tendermint) Bump Tendermint version to [v0.32.9](https://github.com/tendermint/tendermint/releases/tag/v0.32.9).
+
+## [v2.0.4] - 2020-01-09
+
+### Improvements
+
+* (sdk) Bump SDK version to [v0.37.5](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.5).
+* (tendermint) Bump Tendermint version to [v0.32.8](https://github.com/tendermint/tendermint/releases/tag/v0.32.8).
+
+### Bug Fixes
+
+* (cli) Fixed `gaiacli query txs` to use `events` instead of `tags`. Events take the form of `'{eventType}.{eventAttribute}={value}'`. Please
+  see the [events doc](https://github.com/cosmos/cosmos-sdk/blob/master/docs/core/events.md#events-1)
+  for further documentation.
+
+## [v2.0.3] - 2019-11-04
+
+### Improvements
+
+* (sdk) Bump SDK version to [v0.37.4](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.4).
+* (tendermint) Bump Tendermint version to [v0.32.7](https://github.com/tendermint/tendermint/releases/tag/v0.32.7).
+
+## [v2.0.2] - 2019-10-12
+
+### Improvements
+
+* (sdk) Bump SDK version to [v0.37.3](https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.3).
+* (tendermint) Bump Tendermint version to [v0.32.6](https://github.com/tendermint/tendermint/releases/tag/v0.32.6).
+
+## [v2.0.1] - 2019-09-20
+
+### Features
+
+* (gaiad) [\#119](https://github.com/cosmos/gaia/pull/119) Add support for the `--halt-time` CLI flag and configuration.
+
+### Improvements
+
+* [\#119](https://github.com/cosmos/gaia/pull/119) Refactor and upgrade Circle CI
+  configuration.
+* (sdk) Update SDK version to v0.37.1
+
+## [v2.0.0] - 2019-08-22
+
+### Bug Fixes
+
+* [\#104](https://github.com/cosmos/gaia/issues/104) Fix `ModuleAccountAddrs` to
+  not rely on the `x/supply` keeper to get module account addresses for blacklisting.
+
+### Breaking Changes
+
+* (sdk) Update SDK version to v0.37.0
+
+## [v1.0.0] - 2019-08-13
+
+### Bug Fixes
+
+* (gaiad) [\#4113](https://github.com/cosmos/cosmos-sdk/issues/4113) Fix incorrect `$GOBIN` in `Install Go`
+* (gaiacli) [\#3945](https://github.com/cosmos/cosmos-sdk/issues/3945) There's no check for chain-id in TxBuilder.SignStdTx
+* (gaiacli) [\#4190](https://github.com/cosmos/cosmos-sdk/issues/4190) Fix redelegations-from by using the correct params and query endpoint.
+* (gaiacli) [\#4219](https://github.com/cosmos/cosmos-sdk/issues/4219) Return an error when an empty mnemonic is provided during key recovery.
+* (gaiacli) [\#4345](https://github.com/cosmos/cosmos-sdk/issues/4345) Improved Ledger Nano X detection
+
+### Breaking Changes
+
+* (sdk) Update SDK version to v0.36.0
+* (gaiad) [\#3985](https://github.com/cosmos/cosmos-sdk/issues/3985) ValidatorPowerRank uses potential consensus power
+* (gaiad) [\#4027](https://github.com/cosmos/cosmos-sdk/issues/4027) gaiad version command does not return the checksum of the go.sum file shipped along with the source release tarball.
+  Go modules feature guarantees dependencies reproducibility and as long as binaries are built via the Makefile shipped with the sources, no dependendencies can break such guarantee.
+* (gaiad) [\#4159](https://github.com/cosmos/cosmos-sdk/issues/4159) use module pattern and module manager for initialization
+* (gaiad) [\#4272](https://github.com/cosmos/cosmos-sdk/issues/4272) Merge gaiareplay functionality into gaiad replay.
+  Drop `gaiareplay` in favor of new `gaiad replay` command.
+* (gaiacli) [\#3715](https://github.com/cosmos/cosmos-sdk/issues/3715) query distr rewards returns per-validator
+  rewards along with rewards total amount.
+* (gaiacli) [\#40](https://github.com/cosmos/cosmos-sdk/issues/40) rest-server's --cors option is now gone.
+* (gaiacli) [\#4027](https://github.com/cosmos/cosmos-sdk/issues/4027) gaiacli version command dooes not return the checksum of the go.sum file anymore.
+* (gaiacli) [\#4142](https://github.com/cosmos/cosmos-sdk/issues/4142) Turn gaiacli tx send's --from into a required argument.
+  New shorter syntax: `gaiacli tx send FROM TO AMOUNT`
+* (gaiacli) [\#4228](https://github.com/cosmos/cosmos-sdk/issues/4228) Merge gaiakeyutil functionality into gaiacli keys.
+  Drop `gaiakeyutil` in favor of new `gaiacli keys parse` command. Syntax and semantic are preserved.
+* (rest) [\#3715](https://github.com/cosmos/cosmos-sdk/issues/3715) Update /distribution/delegators/{delegatorAddr}/rewards GET endpoint
+  as per new specs. For a given delegation, the endpoint now returns the
+  comprehensive list of validator-reward tuples along with the grand total.
+* (rest) [\#3942](https://github.com/cosmos/cosmos-sdk/issues/3942) Update pagination data in txs query.
+* (rest) [\#4049](https://github.com/cosmos/cosmos-sdk/issues/4049) update tag MsgWithdrawValidatorCommission to match type
+* (rest) The `/auth/accounts/{address}` now returns a `height` in the response. The
+  account is now nested under `account`.
+
+### Features
+
+* (gaiad) Add `migrate` command to `gaiad` to provide the ability to migrate exported
+  genesis state from one version to another.
+* (gaiad) Update Gaia for community pool spend proposals per Cosmos Hub governance proposal [\#7](https://github.com/cosmos/cosmos-sdk/issues/7) "Activate the Community Pool"
+
+### Improvements
+
+* (gaiad) [\#4042](https://github.com/cosmos/cosmos-sdk/issues/4042) Update docs and scripts to include the correct `GO111MODULE=on` environment variable.
+* (gaiad) [\#4066](https://github.com/cosmos/cosmos-sdk/issues/4066) Fix 'ExportGenesisFile() incorrectly overwrites genesis'
+* (gaiad) [\#4064](https://github.com/cosmos/cosmos-sdk/issues/4064) Remove `dep` and `vendor` from `doc` and `version`.
+* (gaiad) [\#4080](https://github.com/cosmos/cosmos-sdk/issues/4080) add missing invariants during simulations
+* (gaiad) [\#4343](https://github.com/cosmos/cosmos-sdk/issues/4343) Upgrade toolchain to Go 1.12.5.
+* (gaiacli) [\#4068](https://github.com/cosmos/cosmos-sdk/issues/4068) Remove redundant account check on `gaiacli`
+* (gaiacli) [\#4227](https://github.com/cosmos/cosmos-sdk/issues/4227) Support for Ledger App v1.5
+* (rest) [\#2007](https://github.com/cosmos/cosmos-sdk/issues/2007) Return 200 status code on empty results
+* (rest) [\#4123](https://github.com/cosmos/cosmos-sdk/issues/4123) Fix typo, url error and outdated command description of doc clients.
+* (rest) [\#4129](https://github.com/cosmos/cosmos-sdk/issues/4129) Translate doc clients to chinese.
+* (rest) [\#4141](https://github.com/cosmos/cosmos-sdk/issues/4141) Fix /txs/encode endpoint
+
+<!-- Release links -->
+
+[Unreleased]: https://github.com/cosmos/gaia/compare/v7.0.3...HEAD
+[v7.0.2]: https://github.com/cosmos/gaia/releases/tag/v7.0.2
+[v7.0.1]: https://github.com/cosmos/gaia/releases/tag/v7.0.1
+[v7.0.0]: https://github.com/cosmos/gaia/releases/tag/v7.0.0
+[v6.0.4]: https://github.com/cosmos/gaia/releases/tag/v6.0.4
+[v6.0.3]: https://github.com/cosmos/gaia/releases/tag/v6.0.3
+[v6.0.2]: https://github.com/cosmos/gaia/releases/tag/v6.0.2
+[v6.0.1]: https://github.com/cosmos/gaia/releases/tag/v6.0.1
+[v6.0.0]: https://github.com/cosmos/gaia/releases/tag/v6.0.0
+[v5.0.8]: https://github.com/cosmos/gaia/releases/tag/v5.0.8
+[v5.0.7]: https://github.com/cosmos/gaia/releases/tag/v5.0.7
+[v5.0.6]: https://github.com/cosmos/gaia/releases/tag/v5.0.6
+[v5.0.5]: https://github.com/cosmos/gaia/releases/tag/v5.0.5
+[v5.0.4]: https://github.com/cosmos/gaia/releases/tag/v5.0.4
+[v5.0.3]: https://github.com/cosmos/gaia/releases/tag/v5.0.3
+[v5.0.2]: https://github.com/cosmos/gaia/releases/tag/v5.0.2
+[v5.0.1]: https://github.com/cosmos/gaia/releases/tag/v5.0.1
+[v5.0.0]: https://github.com/cosmos/gaia/releases/tag/v5.0.0
+[v4.2.1]: https://github.com/cosmos/gaia/releases/tag/v4.2.1
+[v4.2.0]: https://github.com/cosmos/gaia/releases/tag/v4.2.0
+[v4.1.2]: https://github.com/cosmos/gaia/releases/tag/v4.1.2
+[v4.1.1]: https://github.com/cosmos/gaia/releases/tag/v4.1.1
+[v4.1.0]: https://github.com/cosmos/gaia/releases/tag/v4.1.0
+[v4.0.6]: https://github.com/cosmos/gaia/releases/tag/v4.0.6
+[v4.0.5]: https://github.com/cosmos/gaia/releases/tag/v4.0.5
+[v4.0.4]: https://github.com/cosmos/gaia/releases/tag/v4.0.4
+[v4.0.3]: https://github.com/cosmos/gaia/releases/tag/v4.0.3
+[v4.0.2]: https://github.com/cosmos/gaia/releases/tag/v4.0.2
+[v4.0.1]: https://github.com/cosmos/gaia/releases/tag/v4.0.1
+[v4.0.0]: https://github.com/cosmos/gaia/releases/tag/v4.0.0
+[v3.0.1]: https://github.com/cosmos/gaia/releases/tag/v3.0.1
+[v3.0.0]: https://github.com/cosmos/gaia/releases/tag/v3.0.0
+[v2.0.14]: https://github.com/cosmos/gaia/releases/tag/v2.0.14
+[v2.0.13]: https://github.com/cosmos/gaia/releases/tag/v2.0.13
+[v2.0.12]: https://github.com/cosmos/gaia/releases/tag/v2.0.12
+[v2.0.11]: https://github.com/cosmos/gaia/releases/tag/v2.0.11
+[v2.0.10]: https://github.com/cosmos/gaia/releases/tag/v2.0.10
+[v2.0.9]: https://github.com/cosmos/gaia/releases/tag/v2.0.9
+[v2.0.8]: https://github.com/cosmos/gaia/releases/tag/v2.0.8
+[v2.0.7]: https://github.com/cosmos/gaia/releases/tag/v2.0.7
+[v2.0.6]: https://github.com/cosmos/gaia/releases/tag/v2.0.6
+[v2.0.5]: https://github.com/cosmos/gaia/releases/tag/v2.0.5
+[v2.0.4]: https://github.com/cosmos/gaia/releases/tag/v2.0.4
+[v2.0.3]: https://github.com/cosmos/gaia/releases/tag/v2.0.3
+[v2.0.2]: https://github.com/cosmos/gaia/releases/tag/v2.0.2
+[v2.0.1]: https://github.com/cosmos/gaia/releases/tag/v2.0.1
+[v2.0.0]: https://github.com/cosmos/gaia/releases/tag/v2.0.0
+[v1.0.0]: https://github.com/cosmos/gaia/releases/tag/v1.0.0

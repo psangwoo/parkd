@@ -1,242 +1,153 @@
-# Wasm Zone
+<div align="center">
+  <img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F643ab9b2-4062-4367-99f6-59c0f7507e22%2FGroup_1041.png?table=block&id=23fcc36a-07b6-46a5-84d6-2f4a5569cd6e&spaceId=2fa227ac-dee8-4655-ad64-fe3c359def5a&width=250&userId=b57d8bef-0356-4537-8ae8-7251a098e5b3&cache=v2" width="100" height="100" />
+  
+  <hr height="0.5px" />
+  
+  <br/>
+  
+  <h1> Cosmos Hub (Gaia) </h1>
+  <p> The Cosmos Hub is the first of an exploding number of interconnected blockchains that comprise the Cosmos Network. </p>
+  
+  <a href="https://twitter.com/cosmoshub"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" alt="Tweet" height="20"/></a>
+  <br/>
+</div>
 
-[![CircleCI](https://circleci.com/gh/psangwoo/parkd/tree/master.svg?style=shield)](https://circleci.com/gh/psangwoo/parkd/tree/master)
-[![codecov](https://codecov.io/gh/psangwoo/parkd/branch/master/graph/badge.svg)](https://codecov.io/gh/psangwoo/parkd)
-[![Go Report Card](https://goreportcard.com/badge/github.com/psangwoo/parkd)](https://goreportcard.com/report/github.com/psangwoo/parkd)
-[![license](https://img.shields.io/github/license/psangwoo/parkd.svg)](https://github.com/psangwoo/parkd/blob/master/LICENSE)
-[![LoC](https://tokei.rs/b1/github/psangwoo/parkd)](https://github.com/psangwoo/parkd)
-<!-- [![GolangCI](https://golangci.com/badges/github.com/psangwoo/parkd.svg)](https://golangci.com/r/github.com/psangwoo/parkd) -->
+<hr/>
 
-This repository hosts `Wasmd`, the first implementation of a cosmos zone with wasm smart contracts enabled.
+<div align="center">
+  <img src="https://miro.medium.com/max/2000/1*DHtmSfS_Efvuq8n2LAnhkA.png" />
+</div>
 
-This code was forked from the `cosmos/gaia` repository as a basis and then we added `x/wasm` and cleaned up 
-many gaia-specific files. However, the `wasmd` binary should function just like `gaiad` except for the
-addition of the `x/wasm` module.
-
-**Note**: Requires [Go 1.17+](https://golang.org/dl/)
-
-For critical security issues & disclosure, see [SECURITY.md](SECURITY.md).
-## Compatibility with CosmWasm contracts
-
-## Compatibility
-
-A VM can support one or more contract-VM interface versions. The interface
-version is communicated by the contract via a Wasm export. This is the current
-compatibility list:
-
-| wasmd | wasmvm       | cosmwasm-vm | cosmwasm-std |
-| ----- | ------------ | ----------- | ------------ |
-| 0.27  | v1.0.0       |             | 1.0          |
-| 0.26  | 1.0.0-beta10 |             | 1.0          |
-| 0.25  | 1.0.0-beta10 |             | 1.0          |
-| 0.24  | 1.0.0-beta7  | 1.0.0-beta6 | 1.0          |
-| 0.23  |              | 1.0.0-beta5 | 1.0          |
-| 0.22  |              | 1.0.0-beta5 | 1.0          |
-| 0.21  |              | 1.0.0-beta2 | 1.0          |
-| 0.20  |              | 1.0.0-beta  | 1.0          |
-| 0.19  |              | 0.16        | 0.16         |
-| 0.18  |              | 0.16        | 0.16         |
-| 0.17  |              | 0.14        | 0.14         |
-| 0.16  |              | 0.14        | 0.14         |
-| 0.15  |              | 0.13        | 0.11-0.13    |
-| 0.14  |              | 0.13        | 0.11-0.13    |
-| 0.13  |              | 0.12        | 0.11-0.13    |
-| 0.12  |              | 0.12        | 0.11-0.13    |
-| 0.11  |              | 0.11        | 0.11-0.13    |
-| 0.10  |              | 0.10        | 0.10         |
-| 0.9   |              | 0.9         | 0.9          |
-| 0.8   |              | 0.8         | 0.8          |
-
-Note: `cosmwasm_std v1.0` means it supports contracts compiled by any `v1.0.0-betaX` or `1.0.x`.
-It will also run contracts compiled with 1.x assuming they don't opt into any newer features.
-The 1.x cosmwasm_vm will support all contracts with 1.0 <= version <= 1.x. 
-
-Note that `cosmwasm-std` version defines which contracts are compatible with this system. The wasm code uploaded must
-have been compiled with one of the supported `cosmwasm-std` versions, or will be rejeted upon upload (with some error
-message about "contract too old?" or "contract too new?"). `cosmwasm-vm` version defines the runtime used. It is a
-breaking change to switch runtimes (you will need to organize a chain upgrade). As of `cosmwasm-vm 0.13` we are
-using [wasmer](https://github.com/wasmerio/wasmer/) 1.0, which is significantly more performant than the older versions.
-
-## Supported Systems
-
-The supported systems are limited by the dlls created in [`wasmvm`](https://github.com/CosmWasm/wasmvm). In particular, **we only support MacOS and Linux**.
-However, **M1 macs are not fully supported.** (Experimental support was merged with wasmd 0.24)
-For linux, the default is to build for glibc, and we cross-compile with CentOS 7 to provide
-backwards compatibility for `glibc 2.12+`. This includes all known supported distributions
-using glibc (CentOS 7 uses 2.12, obsolete Debian Jessy uses 2.19). 
-
-As of `0.9.0` we support `muslc` Linux systems, in particular **Alpine linux**,
-which is popular in docker distributions. Note that we do **not** store the
-static `muslc` build in the repo, so you must compile this yourself, and pass `-tags muslc`.
-Please look at the [`Dockerfile`](./Dockerfile) for an example of how we build a static Go
-binary for `muslc`. (Or just use this Dockerfile for your production setup).
+<br/>
 
 
-## Stability
+### 🤔 — Why should you be interested in the Cosmos Hub 
+___
 
-**This is beta software** It is run in some production systems, but we cannot yet provide a stability guarantee
-and have not yet gone through and audit of this codebase. Note that the
-[CosmWasm smart contract framework](https://github.com/CosmWasm/cosmwasm) used by `wasmd` is in a 1.0 release candidate
-as of March 2022, with stability guarantee and addressing audit results.
+The Cosmos Hub is built using the [Cosmos SDK](https://github.com/cosmos/cosmos-sdk) and compiled to a binary called `gaiad` (Gaia Daemon). The Cosmos Hub and other fully sovereign Cosmos SDK blockchains interact with one another using a protocol called [IBC](https://github.com/cosmos/ibc) that enables Inter-Blockchain Communication. In order to understand what the Cosmos Hub is you can read this [introductory explanation](https://hub.cosmos.network/main/hub-overview/overview.html).
 
-As of `wasmd` 0.22, we will work to provide upgrade paths *for this module* for projects running a non-forked
-version on their live networks. If there are Cosmos SDK upgrades, you will have to run their migration code
-for their modules. If we change the internal storage of `x/wasm` we will provide a function to migrate state that
-can be called by an `x/upgrade` handler.
+|  |  |  |  |  |
+| --- | --- | --- | --- | --- |
+| [![codecov](https://codecov.io/gh/cosmos/gaia/branch/master/graph/badge.svg)](https://codecov.io/gh/cosmos/gaia) | [![Go Report Card](https://goreportcard.com/badge/github.com/cosmos/gaia)](https://goreportcard.com/report/github.com/cosmos/gaia) | [![license](https://img.shields.io/github/license/cosmos/gaia.svg)](https://github.com/cosmos/gaia/blob/main/LICENSE) | [![LoC](https://tokei.rs/b1/github/cosmos/gaia)](https://github.com/cosmos/gaia) | [![GolangCI](https://golangci.com/badges/github.com/cosmos/gaia.svg)](https://golangci.com/r/github.com/cosmos/gaia) |
 
-The APIs are pretty stable, but we cannot guarantee their stability until we reach v1.0.
-However, we will provide a way for you to hard-fork your way to v1.0.
 
-Thank you to all projects who have run this code in your mainnets and testnets and
-given feedback to improve stability.
+<br/>
+<br/>
 
-## Encoding
-The used cosmos-sdk version is in transition migrating from amino encoding to protobuf for state. So are we now.
 
-We use standard cosmos-sdk encoding (amino) for all sdk Messages. However, the message body sent to all contracts, 
-as well as the internal state is encoded using JSON. Cosmwasm allows arbitrary bytes with the contract itself 
-responsible for decodng. For better UX, we often use `json.RawMessage` to contain these bytes, which enforces that it is
-valid json, but also give a much more readable interface.  If you want to use another encoding in the contracts, that is
-a relatively minor change to wasmd but would currently require a fork. Please open in issue if this is important for 
-your use case.
+### ⚡ — Documentation & Introduction
+___
 
-## Quick Start
+Cosmos Hub is a blockchain network that operates on Proof-of-Stake consensus. You can find an introduction to the Cosmos Hub and how to use the `gaiad` binary as a delegator, validator or node operator as well as how governance on the Cosmos Hub works in the [documentation](https://hub.cosmos.network/main/hub-overview/overview.html). 
 
-```
-make install
-make test
-```
-if you are using a linux without X or headless linux, look at [this article](https://ahelpme.com/linux/dbusexception-could-not-get-owner-of-name-org-freedesktop-secrets-no-such-name) or [#31](https://github.com/psangwoo/parkd/issues/31#issuecomment-577058321).
+Alternatively, whether you're new to blockchain technology or interested in getting involed, the Cosmos Network [Course](https://tutorials.cosmos.network/academy/0-welcome/) will guide you through everything. The course walks you through the basics of blockchain technology, to staking, setting up your own node, and beyond.
 
-## Protobuf
-Generate protobuf
-```shell script
-make proto-gen
-```
-The generators are executed within a Docker [container](./contrib/prototools-docker), now.
 
-## Dockerized
 
-We provide a docker image to help with test setups. There are two modes to use it
 
-Build: `docker build -t psangwoo/parkd:latest .`  or pull from dockerhub
+<br/>
+<br/>
 
-### Dev server
 
-Bring up a local node with a test account containing tokens
+### 👤 — Node Operators
+___
+If you're interested in running a node on the current Cosmos Hub, check out the docs to [Join the Cosmos Hub Mainnet](https://github.com/cosmos/gaia/blob/main/docs/hub-tutorials/join-mainnet.md).
 
-This is just designed for local testing/CI - do not use these scripts in production.
-Very likely you will assign tokens to accounts whose mnemonics are public on github.
 
-```sh
-docker volume rm -f wasmd_data
+<br/>
+<br/>
 
-# pass password (one time) as env variable for setup, so we don't need to keep typing it
-# add some addresses that you have private keys for (locally) to give them genesis funds
-docker run --rm -it \
-    -e PASSWORD=xxxxxxxxx \
-    --mount type=volume,source=wasmd_data,target=/root \
-    psangwoo/parkd:latest /opt/setup_wasmd.sh cosmos1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6
 
-# This will start both wasmd and rest-server, both are logged
-docker run --rm -it -p 26657:26657 -p 26656:26656 -p 1317:1317 \
-    --mount type=volume,source=wasmd_data,target=/root \
-    psangwoo/parkd:latest /opt/run_wasmd.sh
-```
+### 🗣️ — Validators
+___
 
-### CI
+If you want to participate and help secure Cosmos Hub, check out becoming a validator. Information on what a validator is and how to participate as one can be found at the [Validator FAQ](https://hub.cosmos.network/main/validators/validator-faq.html#). If you're running a validator node on the Cosmos Hub, reach out to a Janitor on the [Cosmos Developers Discord](https://discord.gg/cosmosnetwork) to join the `#validators-verified` channel.
 
-For CI, we want to generate a template one time and save to disk/repo. Then we can start a chain copying the initial state, but not modifying it. This lets us get the same, fresh start every time.
 
-```sh
-# Init chain and pass addresses so they are non-empty accounts
-rm -rf ./template && mkdir ./template
-docker run --rm -it \
-    -e PASSWORD=xxxxxxxxx \
-    --mount type=bind,source=$(pwd)/template,target=/root \
-    psangwoo/parkd:latest /opt/setup_wasmd.sh cosmos1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6
+<br/>
+<br/>
 
-sudo chown -R $(id -u):$(id -g) ./template
 
-# FIRST TIME
-# bind to non-/root and pass an argument to run.sh to copy the template into /root
-# we need wasmd_data volume mount not just for restart, but also to view logs
-docker volume rm -f wasmd_data
-docker run --rm -it -p 26657:26657 -p 26656:26656 -p 9090:9090 \
-    --mount type=bind,source=$(pwd)/template,target=/template \
-    --mount type=volume,source=wasmd_data,target=/root \
-    psangwoo/parkd:latest /opt/run_wasmd.sh /template
+### 👥 — Delegators
+___
 
-# RESTART CHAIN with existing state
-docker run --rm -it -p 26657:26657 -p 26656:26656 -p 1317:1317 \
-    --mount type=volume,source=wasmd_data,target=/root \
-    psangwoo/parkd:latest /opt/run_wasmd.sh
-```
+If you still want to participate on the Cosmos Hub, check out becoming a delegator. Information what a delegator is and how to participate as one can be found at the [Delegator FAQ](https://hub.cosmos.network/main/delegators/delegator-faq.html).
 
-## Runtime flags
 
-We provide a number of variables in `app/app.go` that are intended to be set via `-ldflags -X ...`
-compile-time flags. This enables us to avoid copying a new binary directory over for each small change
-to the configuration. 
+<br/>
+<br/>
 
-Available flags:
- 
-* `-X github.com/psangwoo/parkd/app.NodeDir=.corald` - set the config/data directory for the node (default `~/.wasmd`)
-* `-X github.com/psangwoo/parkd/app.Bech32Prefix=coral` - set the bech32 prefix for all accounts (default `wasm`)
-* `-X github.com/psangwoo/parkd/app.ProposalsEnabled=true` - enable all x/wasm governance proposals (default `false`)
-* `-X github.com/psangwoo/parkd/app.EnableSpecificProposals=MigrateContract,UpdateAdmin,ClearAdmin` - 
-    enable a subset of the x/wasm governance proposal types (overrides `ProposalsEnabled`)
+### 👥 — Testnet
+___
 
-Examples:
+To participate in or utilize the current Cosmos Hub testnet, take a look at the [cosmos/testnets](https://github.com/cosmos/testnets) repository. This testnet is for the Theta Upgrade expected in Q1 2022. For future upgrades of the Cosmos Hub take a look at the [roadmap](https://github.com/cosmos/gaia/blob/main/docs/roadmap/cosmos-hub-roadmap-2.0.md).
 
-* [`wasmd`](./Makefile#L50-L55) is a generic, permissionless version using the `cosmos` bech32 prefix
 
-## Compile Time Parameters
+<br/>
+<br/>
 
-Besides those above variables (meant for custom wasmd compilation), there are a few more variables which
-we allow blockchains to customize, but at compile time. If you build your own chain and import `x/wasm`,
-you can adjust a few items via module parameters, but a few others did not fit in that, as they need to be
-used by stateless `ValidateBasic()`. Thus, we made them public `var` and these can be overridden in the `app.go`
-file of your custom chain.
 
-* `wasmtypes.MaxLabelSize = 64` to set the maximum label size on instantiation (default 128)
-* `wasmtypes.MaxWasmSize=777000` to set the max size of compiled wasm to be accepted (default 819200)
+### 🌐 — Roadmap
+___
 
-## Genesis Configuration
-We strongly suggest **to limit the max block gas in the genesis** and not use the default value (`-1` for infinite).
-```json
-  "consensus_params": {
-    "block": {
-      "max_gas": "SET_YOUR_MAX_VALUE",  
-```
+For an overview of upcoming changes to the Cosmos Hub take a look at the [Roadmap](https://github.com/cosmos/gaia/blob/main/docs/roadmap/cosmos-hub-roadmap-2.0.md).
 
-Tip: if you want to lock this down to a permisisoned network, the following script can edit the genesis file
-to only allow permissioned use of code upload or instantiating. (Make sure you set `app.ProposalsEnabled=true`
-in this binary):
 
-`sed -i 's/permission": "Everybody"/permission": "Nobody"/'  .../config/genesis.json`
+<br/>
+<br/>
 
-## Contributors
 
-Much thanks to all who have contributed to this project, from this app, to the `cosmwasm` framework, to example contracts and documentation.
-Or even testing the app and bringing up critical issues. The following have helped bring this project to life:
+### 🗄️ — Archives & Genesis
+___
 
-* Ethan Frey [ethanfrey](https://github.com/ethanfrey)
-* Simon Warta [webmaster128](https://github.com/webmaster128)
-* Alex Peters [alpe](https://github.com/alpe)
-* Aaron Craelius [aaronc](https://github.com/aaronc)
-* Sunny Aggarwal [sunnya97](https://github.com/sunnya97)
-* Cory Levinson [clevinson](https://github.com/clevinson)
-* Sahith Narahari [sahith-narahari](https://github.com/sahith-narahari)
-* Jehan Tremback [jtremback](https://github.com/jtremback)
-* Shane Vitarana [shanev](https://github.com/shanev)
-* Billy Rennekamp [okwme](https://github.com/okwme)
-* Westaking [westaking](https://github.com/westaking)
-* Marko [marbar3778](https://github.com/marbar3778)
-* JayB [kogisin](https://github.com/kogisin)
-* Rick Dudley [AFDudley](https://github.com/AFDudley)
-* KamiD [KamiD](https://github.com/KamiD)
-* Valery Litvin [litvintech](https://github.com/litvintech)
-* Leonardo Bragagnolo [bragaz](https://github.com/bragaz)
+With each version of the Cosmos Hub, the chain is restarted from a new Genesis state. 
+Mainnet is currently running as `cosmoshub-4`. Archives of the state of `cosmoshub-1`, `cosmoshub-2`, and `cosmoshub-3` are available [here](./docs/resources/archives.md).
 
-Sorry if I forgot you from this list, just contact me or add yourself in a PR :)
+If you are looking for historical genesis files and other data [`cosmos/mainnet`](http://github.com/cosmos/mainnet) is an excellent resource. Snapshots are also available at [cosmos.quicksync.io](https://cosmos.quicksync.io).
+
+
+<br/>
+<br/>
+
+
+### 🤝 — How to contribute 
+___
+
+Check out [contributing.md](CONTRIBUTING.md) for our guidelines & policies for how we develop the Cosmos Hub. Thank you to all those who have contributed!
+
+
+<br/>
+<br/>
+
+
+### 💬 — Talk to us
+___
+
+We have active, helpful communities on Twitter, Discord, and Telegram.
+
+|    |    |
+| -- | -- |
+| Cosmos Developers Discord | <a href="https://discord.gg/cosmosnetwork"><img src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" height="30"/></a> |
+| Cosmos Twitter | <a href="https://twitter.com/cosmos"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" alt="Tweet" height="30"/></a> |
+| Cosmos Telegram | <a href="https://t.me/cosmosproject"><img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram" height="30"/></a> |
+
+
+For updates on the Cosmos Hub team's activities follow us on the [Cosmos Hub Twitter](https://twitter.com/cosmoshub) account.
+
+
+<br/>
+<br/>
+
+### 👏 — Supporters
+___
+
+[![Stargazers repo roster for @cosmos/gaia](https://reporoster.com/stars/cosmos/gaia)](https://github.com/cosmos/gaia/stargazers)
+[![Forkers repo roster for @cosmos/gaia](https://reporoster.com/forks/cosmos/gaia)](https://github.com/cosmos/gaia/network/members)
+
+<br/>
+
+<p align="center"><a href="https://github.com/nastyox/Rando.js#nastyox"><img src="http://randojs.com/images/barsSmallTransparentBackground.gif" alt="Animated footer bars" width="100%"/></a></p>
+
+<br/>
+
+<p align="center"><a href="https://github.com/cosmos/gaia#"><img src="http://randojs.com/images/backToTopButtonTransparentBackground.png" alt="Back to top" height="29"/></a></p>

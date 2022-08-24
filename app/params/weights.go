@@ -16,11 +16,9 @@ const (
 	DefaultWeightMsgDelegate                    int = 100
 	DefaultWeightMsgUndelegate                  int = 100
 	DefaultWeightMsgBeginRedelegate             int = 100
+	DefaultWeightMsgCancelUnbondingDelegation   int = 100
 
 	DefaultWeightCommunitySpendProposal int = 5
 	DefaultWeightTextProposal           int = 5
 	DefaultWeightParamChangeProposal    int = 5
-	DefaultWeightMsgStoreCode           int = 50
-	DefaultWeightMsgInstantiateContract int = 100
-	DefaultWeightMsgExecuteContract     int = 100
 )

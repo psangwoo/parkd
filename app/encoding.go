@@ -1,14 +1,17 @@
-package app
+package gaia
 
 import (
-	"github.com/cosmos/cosmos-sdk/std"
+	"github.com/cosmos/gaia/v8/app/params"
 
-	"github.com/psangwoo/parkd/app/params"
+	"github.com/cosmos/cosmos-sdk/std"
 )
 
-// MakeEncodingConfig creates a new EncodingConfig with all modules registered
-func MakeEncodingConfig() params.EncodingConfig {
-	encodingConfig := params.MakeEncodingConfig()
+// MakeTestEncodingConfig creates an EncodingConfig for testing. This function
+// should be used only in tests or when creating a new app instance (NewApp*()).
+// App user shouldn't create new codecs - use the app.AppCodec instead.
+// [DEPRECATED]
+func MakeTestEncodingConfig() params.EncodingConfig {
+	encodingConfig := params.MakeTestEncodingConfig()
 	std.RegisterLegacyAminoCodec(encodingConfig.Amino)
 	std.RegisterInterfaces(encodingConfig.InterfaceRegistry)
 	ModuleBasics.RegisterLegacyAminoCodec(encodingConfig.Amino)
