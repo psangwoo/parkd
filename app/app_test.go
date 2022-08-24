@@ -9,7 +9,7 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	db "github.com/tendermint/tm-db"
 
-	gaia "github.com/cosmos/gaia/v8/app"
+	gaia "github.com/psangwoo/parkd/app"
 )
 
 type EmptyAppOptions struct{}

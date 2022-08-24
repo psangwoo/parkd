@@ -25,7 +25,7 @@ import (
 	"github.com/tendermint/tendermint/p2p"
 	"github.com/tendermint/tendermint/privval"
 
-	gaia "github.com/cosmos/gaia/v8/app"
+	gaia "github.com/psangwoo/parkd/app"
 )
 
 //nolint:unused

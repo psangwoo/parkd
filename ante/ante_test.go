@@ -16,10 +16,10 @@ import (
 	tmrand "github.com/tendermint/tendermint/libs/rand"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	gaiaapp "github.com/cosmos/gaia/v8/app"
-	gaiahelpers "github.com/cosmos/gaia/v8/app/helpers"
-	"github.com/cosmos/gaia/v8/x/globalfee"
-	globfeetypes "github.com/cosmos/gaia/v8/x/globalfee/types"
+	gaiaapp "github.com/psangwoo/parkd/app"
+	gaiahelpers "github.com/psangwoo/parkd/app/helpers"
+	"github.com/psangwoo/parkd/x/globalfee"
+	globfeetypes "github.com/psangwoo/parkd/x/globalfee/types"
 )
 
 type IntegrationTestSuite struct {

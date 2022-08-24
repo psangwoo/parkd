@@ -21,7 +21,7 @@ import (
 	tmtypes "github.com/tendermint/tendermint/types"
 	dbm "github.com/tendermint/tm-db"
 
-	gaiaapp "github.com/cosmos/gaia/v8/app"
+	gaiaapp "github.com/psangwoo/parkd/app"
 )
 
 // SimAppChainID hardcoded chainID for simulation

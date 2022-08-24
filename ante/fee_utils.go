@@ -4,7 +4,7 @@ import (
 	"math"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/gaia/v8/x/globalfee/types"
+	"github.com/psangwoo/parkd/x/globalfee/types"
 	tmstrings "github.com/tendermint/tendermint/libs/strings"
 )
 

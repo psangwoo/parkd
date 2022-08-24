@@ -5,7 +5,7 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 
-	"github.com/cosmos/gaia/v8/x/globalfee"
+	"github.com/psangwoo/parkd/x/globalfee"
 )
 
 const maxBypassMinFeeMsgGasUsage = uint64(200_000)

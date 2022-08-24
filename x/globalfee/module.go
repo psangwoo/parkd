@@ -16,8 +16,8 @@ import (
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/cosmos/gaia/v8/x/globalfee/client/cli"
-	"github.com/cosmos/gaia/v8/x/globalfee/types"
+	"github.com/psangwoo/parkd/x/globalfee/client/cli"
+	"github.com/psangwoo/parkd/x/globalfee/types"
 )
 
 var (

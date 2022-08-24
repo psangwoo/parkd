@@ -114,9 +114,9 @@ import (
 	tmos "github.com/tendermint/tendermint/libs/os"
 	dbm "github.com/tendermint/tm-db"
 
-	gaiaante "github.com/cosmos/gaia/v8/ante"
-	gaiaappparams "github.com/cosmos/gaia/v8/app/params"
-	"github.com/cosmos/gaia/v8/x/globalfee"
+	gaiaante "github.com/psangwoo/parkd/ante"
+	gaiaappparams "github.com/psangwoo/parkd/app/params"
+	"github.com/psangwoo/parkd/x/globalfee"
 
 	// unnamed import of statik for swagger UI support
 	_ "github.com/cosmos/cosmos-sdk/client/docs/statik"

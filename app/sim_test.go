@@ -7,10 +7,10 @@ import (
 	"os"
 	"testing"
 
-	gaia "github.com/cosmos/gaia/v8/app"
-	"github.com/cosmos/gaia/v8/app/params"
+	gaia "github.com/psangwoo/parkd/app"
+	"github.com/psangwoo/parkd/app/params"
 
-	"github.com/cosmos/gaia/v8/app/helpers"
+	"github.com/psangwoo/parkd/app/helpers"
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/libs/log"
 	dbm "github.com/tendermint/tm-db"

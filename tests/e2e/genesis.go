@@ -18,7 +18,7 @@ import (
 	staketypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	globfeetypes "github.com/cosmos/gaia/v8/x/globalfee/types"
+	globfeetypes "github.com/psangwoo/parkd/x/globalfee/types"
 )
 
 func getGenDoc(path string) (*tmtypes.GenesisDoc, error) {
